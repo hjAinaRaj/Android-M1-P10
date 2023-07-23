@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.115625" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/ic_launcher_background.xml" value="0.115625" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/main_activity.xml" value="0.14375" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/main_fragment.xml" value="0.1" />
       </map>
     </option>
