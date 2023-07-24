@@ -4,8 +4,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+//import org.apache.http.NameValuePair;
+//import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class WsAccess  extends AsyncTask<String, Integer, String> {
-    private ArrayList<NameValuePair> parameters;
+    //private ArrayList<NameValuePair> parameters;
     private String returnString = null;
     private String method = "GET";
     public JSONObject jsonParams = null;
@@ -26,12 +26,12 @@ public class WsAccess  extends AsyncTask<String, Integer, String> {
         super();
         this.method = method;
         this.responseHandler = responseHandler;
-        parameters = new ArrayList<NameValuePair>();
+        //parameters = new ArrayList<NameValuePair>();
     }
 
 
     public void addParam(String key, String valeur){
-        parameters.add(new BasicNameValuePair(key, valeur));
+        //parameters.add(new BasicNameValuePair(key, valeur));
 
     }
 
