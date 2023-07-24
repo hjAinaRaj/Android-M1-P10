@@ -1,4 +1,4 @@
-package mada.android.ui.activities;
+package mada.android.commons.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
@@ -6,8 +6,7 @@ import androidx.core.splashscreen.SplashScreen;
 import android.os.Bundle;
 
 import mada.android.R;
-import mada.android.ui.fragments.DestinationListFragment;
-import mada.android.ui.fragments.main.MainFragment;
+import mada.android.visitor.fragments.DestinationListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

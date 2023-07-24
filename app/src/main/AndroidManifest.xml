@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mada">
         <activity
+            android:name=".visitor.activities.DestinationListActivity"
+            android:exported="false" />
+        <activity
             android:name=".commons.activities.AuthActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".commons.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
             <intent-filter>
