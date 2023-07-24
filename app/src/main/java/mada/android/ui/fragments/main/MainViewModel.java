@@ -1,4 +1,4 @@
-package mada.android.activities.main;
+package mada.android.ui.fragments.main;
 
 import androidx.lifecycle.ViewModel;
 

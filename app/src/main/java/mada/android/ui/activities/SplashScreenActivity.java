@@ -1,12 +1,10 @@
-package mada.android.activities;
+package mada.android.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-
-import mada.android.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

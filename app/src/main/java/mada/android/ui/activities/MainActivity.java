@@ -1,4 +1,4 @@
-package mada.android.activities;
+package mada.android.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
@@ -6,7 +6,8 @@ import androidx.core.splashscreen.SplashScreen;
 import android.os.Bundle;
 
 import mada.android.R;
-import mada.android.activities.main.MainFragment;
+import mada.android.ui.fragments.DestinationListFragment;
+import mada.android.ui.fragments.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.container, DestinationListFragment.newInstance())
                     .commitNow();
         }
     }

@@ -1,4 +1,4 @@
-package mada.android.activities.main;
+package mada.android.ui.fragments.main;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -27,6 +27,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.main_fragment, container, false);
+
+
     }
 
     @Override
