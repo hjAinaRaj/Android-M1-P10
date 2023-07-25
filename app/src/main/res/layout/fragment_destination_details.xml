@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/id_mainScroll_ScrollView"
+    android:layout_height="match_parent"
+    android:background="#edf2fa" >
+
+    <!-- main layout -->
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ScrollViewSize">
+
+        <!-- cover image -->
+
+        <ImageView
+            android:id="@+id/id_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="263dp"
+            android:background="@drawable/destination_img"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription" />
+
+
+
+
+        <!-- Name And Description  -->
+
+        <RelativeLayout
+            android:id="@+id/id_profile_RelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="217dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="152dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_recat">
+
+
+            <mada.android.commons.fonts.cairoBoldTextView
+                android:id="@+id/id_fullName_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="65dp"
+                android:gravity="center"
+                android:text="Rova Manjakamiadana"
+                android:textColor="#5f5f5f"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <mada.android.commons.fonts.cairoTextView
+                android:id="@+id/id_description_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_fullName_TextView"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="22dp"
+                android:gravity="center"
+                android:text="Site touristique"
+                android:textColor="#5f5f5f"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+
+
+
+        </RelativeLayout>
+
+        <!-- Post List -->
+
+    </RelativeLayout>
+
+</ScrollView>

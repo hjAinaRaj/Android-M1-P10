@@ -1,9 +1,10 @@
 package mada.android.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Destination {
+public class Destination implements Serializable {
     private String _id;
     private String title;
     private String description;
