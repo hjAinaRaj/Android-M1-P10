@@ -15,10 +15,6 @@ public class MainActivity extends BaseActivity {
         SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, DestinationListFragment.newInstance())
-                    .commitNow();
-        }
+
     }
 }
