@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/id_mainScroll_ScrollView"
@@ -68,11 +69,23 @@
                 tools:ignore="HardcodedText" />
 
 
-
-
         </RelativeLayout>
 
-        <!-- Post List -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="374dp"
+            android:layout_marginBottom="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="18dp">
+
+            <WebView
+                android:id="@+id/destinationDetailsWebView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_recat" />
+
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 
