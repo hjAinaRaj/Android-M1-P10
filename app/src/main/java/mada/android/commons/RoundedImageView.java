@@ -1,6 +1,6 @@
 package mada.android.commons;
-
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.util.AttributeSet;
@@ -8,21 +8,34 @@ import android.util.AttributeSet;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
+import mada.android.R;
+
 public class RoundedImageView extends AppCompatImageView {
 
     private Path clipPath = new Path();
-    private float cornerRadius = 16f; // Desired corner radius
+    private float cornerRadius;
 
     public RoundedImageView(Context context) {
         super(context);
+        init(null);
     }
 
     public RoundedImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init(attrs);
     }
 
     public RoundedImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(attrs);
+    }
+
+    private void init(@Nullable AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.RoundedImageView);
+            cornerRadius = a.getDimension(R.styleable.RoundedImageView_cornerRadius, 0f);
+            a.recycle();
+        }
     }
 
     @Override
@@ -39,4 +52,3 @@ public class RoundedImageView extends AppCompatImageView {
         super.onDraw(canvas);
     }
 }
-

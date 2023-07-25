@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="300dp"
@@ -14,7 +15,8 @@
         android:background="@drawable/bg_recat"
         android:scaleType="centerCrop"
         android:src="@drawable/destination_img"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        app:cornerRadius="18dp"/>
 
     <mada.android.commons.fonts.cairoBoldTextView
         android:id="@+id/destinationTitleTextView"
