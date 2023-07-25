@@ -11,6 +11,7 @@
         android:title="@string/hotel" />
     <item
         android:id="@+id/accueilMenu"
+        android:checked="true"
         android:icon="@android:drawable/ic_dialog_dialer"
         android:title="@string/accueil" />
     <item

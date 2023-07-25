@@ -8,4 +8,7 @@
     <string name="accueil">Accueil</string>
     <string name="actuality">Actualité</string>
     <string name="settings">Préférence</string>
+    <string name="contact">Nous contacter</string>
+    <string name="nightMode">Mode nuit</string>
+    <string name="language">Langue</string>
 </resources>

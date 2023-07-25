@@ -1,5 +1,6 @@
 package mada.android.commons.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -31,8 +32,8 @@ public class BaseFragment extends Fragment {
         return view;
     }
 
-    public void startNewActivity(View v, Class activityClass){
-        Intent intent = new Intent(v.getContext(), activityClass);
+    public void startNewActivity(View v, Activity activity){
+        Intent intent = new Intent(v.getContext(), activity.getClass());
         startActivity(intent);
     }
 

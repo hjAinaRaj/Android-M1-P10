@@ -21,20 +21,8 @@
             android:orientation="vertical" >
 
             <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView"
-                android:name="mada.android.visitor.fragments.home.HomeVisitorDestinationListFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView2"
-                android:name="mada.android.visitor.fragments.home.HomeVisitorHotelListFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView3"
-                android:name="mada.android.visitor.fragments.home.HomeVisitorActualityListFragment"
+                android:id="@+id/fragmentContainerViewHomeVisitor"
+                android:name="mada.android.visitor.fragments.home.HomeVisitorFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
