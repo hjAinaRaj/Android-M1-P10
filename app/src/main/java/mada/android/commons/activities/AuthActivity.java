@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import mada.android.R;
 
-public class AuthActivity extends AppCompatActivity {
+public class AuthActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
