@@ -16,7 +16,7 @@ public class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
     }
 
-    private void replaceFragment(int idFragmentContainer, Fragment fragment){
+    public void replaceFragment(int idFragmentContainer, Fragment fragment){
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(idFragmentContainer, fragment.getClass(), null)

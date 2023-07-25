@@ -8,7 +8,7 @@ import android.os.Bundle;
 import mada.android.R;
 import mada.android.visitor.fragments.DestinationListFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
