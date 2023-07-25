@@ -55,38 +55,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="TextView" />
+                android:text="@string/email" />
 
             <EditText
-                android:id="@+id/editTextText"
+                android:id="@+id/editTextEmailLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
-                android:text="Name" />
+                android:inputType="text" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="TextView" />
+                android:text="@string/password" />
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/editTextPasswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
-                android:text="Name" />
+                android:inputType="text" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Button"
+                android:text="@string/login"
                 app:cornerRadius="32dp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_account"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textViewToSignin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/signin"
+                android:textAlignment="center" />
 
         </LinearLayout>
     </ScrollView>

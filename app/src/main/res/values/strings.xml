@@ -11,4 +11,12 @@
     <string name="contact">Nous contacter</string>
     <string name="nightMode">Mode nuit</string>
     <string name="language">Langue</string>
+    <string name="email">Adresse email</string>
+    <string name="password">Mot de passe</string>
+    <string name="no_account">Pas encore de compte?</string>
+    <string name="signin">S\'inscrire</string>
+    <string name="name">Nom</string>
+    <string name="firstname">Prénom</string>
+    <string name="confirm_password">Confirmer votre mot de passe</string>
+    <string name="have_account">Déjà un compte?</string>
 </resources>
