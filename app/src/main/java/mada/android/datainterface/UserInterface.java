@@ -2,7 +2,8 @@ package mada.android.datainterface;
 
 import java.util.List;
 
-import mada.android.model.User;
+import mada.android.models.users.User;
+import mada.android.models.users.UserToken;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -12,9 +13,9 @@ public interface UserInterface {
     @GET("/users")
     Call<List<User>> get();
 
-    @POST("/login")
-    Call<User> login(@Body User retroPhoto);
+    @POST("/users/login")
+    Call<UserToken> login(@Body User user);
 
-    @POST("/signin")
+    @POST("/users/signin")
     Call<User> signin(@Body User retroPhoto);
 }

@@ -10,17 +10,30 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import mada.android.R;
+import mada.android.commons.activities.AuthActivity;
+import mada.android.models.users.User;
+import mada.android.models.users.UserToken;
+import mada.android.services.UserService;
+import mada.android.tools.token.TokenUtilities;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginFragment extends BaseFragment {
+    private UserService userService;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
     private TextView textViewSignin;
     public LoginFragment() {
         // Required empty public constructor
+        if(userService == null){
+            userService = new UserService();
+        }
     }
 
     @Override
@@ -53,8 +66,30 @@ public class LoginFragment extends BaseFragment {
         this.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(v, new HomeVisitorActivity());
+                try {
+                    User user = new User();
+                    user.setEmail(editTextEmail.getText().toString());
+                    user.setPassword(editTextPassword.getText().toString());
+                    Call<UserToken> call = userService.login(user);
+                    call.enqueue(new Callback<UserToken>() {
+                        @Override
+                        public void onResponse(Call<UserToken> call, Response<UserToken> response) {
+                            UserToken userToken = response.body();
+                            TokenUtilities.saveToken(new AuthActivity(), userToken.getToken());
+                            startNewActivity(v, new HomeVisitorActivity());
+                        }
+
+                        @Override
+                        public void onFailure(Call<UserToken> call, Throwable t) {
+                            Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }catch (Exception e){
+                    Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
+
 }
