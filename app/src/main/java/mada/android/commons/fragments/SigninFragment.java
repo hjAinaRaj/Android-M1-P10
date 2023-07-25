@@ -10,16 +10,30 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import mada.android.R;
+import mada.android.commons.activities.AuthActivity;
+import mada.android.models.defaultResponses.MessageResponse;
+import mada.android.models.users.User;
+import mada.android.models.users.UserToken;
+import mada.android.services.UserService;
+import mada.android.tools.token.TokenUtilities;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SigninFragment extends BaseFragment {
+    private UserService userService;
     private EditText editTextName, editTextFirstname, editTextEmail, editTextPassword, editTextPasswordConfirm;
     private Button buttonSignin;
     private TextView textViewToLogin;
     public SigninFragment() {
         // Required empty public constructor
+        if(userService == null){
+            userService = new UserService();
+        }
     }
 
     @Override
@@ -48,7 +62,31 @@ public class SigninFragment extends BaseFragment {
         this.buttonSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(v, new HomeVisitorActivity());
+                try {
+                    User user = new User();
+                    user.setFirstName(editTextFirstname.getText().toString());
+                    user.setLastName(editTextName.getText().toString());
+                    user.setEmail(editTextEmail.getText().toString());
+                    user.setPassword(editTextPassword.getText().toString());
+                    user.setConfirmPassword(editTextPasswordConfirm.getText().toString());
+                    Call<MessageResponse> call = userService.signin(user);
+                    call.enqueue(new Callback<MessageResponse>() {
+                        @Override
+                        public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                            MessageResponse messageResponse = response.body();
+                            Toast.makeText(v.getContext(), messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            startNewActivity(v, new HomeVisitorActivity());
+                        }
+
+                        @Override
+                        public void onFailure(Call<MessageResponse> call, Throwable t) {
+                            Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }catch (Exception e){
+                    Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
