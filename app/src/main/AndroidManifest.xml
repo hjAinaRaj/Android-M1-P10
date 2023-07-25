@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mada">
         <activity
+            android:name=".visitor.activities.home.HomeVisitorActivity"
+            android:exported="false" />
+        <activity
             android:name=".visitor.activities.DestinationListActivity"
             android:exported="false" />
         <activity
