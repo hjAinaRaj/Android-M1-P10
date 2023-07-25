@@ -2,6 +2,7 @@ package mada.android.datainterface;
 
 import java.util.List;
 
+import mada.android.models.defaultResponses.MessageResponse;
 import mada.android.models.users.User;
 import mada.android.models.users.UserToken;
 import retrofit2.Call;
@@ -17,5 +18,5 @@ public interface UserInterface {
     Call<UserToken> login(@Body User user);
 
     @POST("/users/signin")
-    Call<User> signin(@Body User retroPhoto);
+    Call<MessageResponse> signin(@Body User user);
 }

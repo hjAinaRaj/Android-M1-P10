@@ -1,6 +1,7 @@
 package mada.android.services;
 
 import mada.android.datainterface.UserInterface;
+import mada.android.models.defaultResponses.MessageResponse;
 import mada.android.models.users.User;
 import mada.android.models.users.UserToken;
 import mada.android.tools.ws.RetrofitClientInstance;
@@ -19,6 +20,11 @@ public class UserService {
 
     public Call<UserToken> login(User user) throws Exception{
         Call<UserToken> call = userInterface.login(user);
+        return call;
+    }
+
+    public Call<MessageResponse> signin(User user) throws Exception{
+        Call<MessageResponse> call = userInterface.signin(user);
         return call;
     }
 }
