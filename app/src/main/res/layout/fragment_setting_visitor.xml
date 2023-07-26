@@ -6,7 +6,7 @@
     tools:context=".visitor.fragments.home.SettingVisitorFragment">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView4"
+        android:id="@+id/fragmentContainerViewSettingVisitor"
         android:name="mada.android.visitor.fragments.settings.SettingUnknownVisitorFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
