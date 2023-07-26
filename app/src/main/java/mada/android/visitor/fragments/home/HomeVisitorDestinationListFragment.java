@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import mada.android.models.destination.Destination;
 import mada.android.models.destination.DestinationList;
 import mada.android.models.users.UserToken;
 import mada.android.services.DestinationService;
+import mada.android.visitor.fragments.DestinationListFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +30,7 @@ import retrofit2.Response;
 public class HomeVisitorDestinationListFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private DestinationService service;
+    private Button buttonShowMore;
 
     public HomeVisitorDestinationListFragment() {
         // Required empty public constructor
@@ -55,6 +58,14 @@ public class HomeVisitorDestinationListFragment extends BaseFragment {
         this.recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewHomeVisitorDestinationList);
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        this.buttonShowMore = (Button) view.findViewById(R.id.buttonShowMoreDestination);
+
+        this.buttonShowMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(R.id.fragmentContainerViewHomeVisitor, new DestinationListFragment());
+            }
+        });
     }
 
     private void getList(View view){
@@ -79,6 +90,7 @@ public class HomeVisitorDestinationListFragment extends BaseFragment {
 
     public void generateList(List<Destination> list){
         SeparatedDestinationAdapter adapter = new SeparatedDestinationAdapter((ArrayList<Destination>) list);
+        adapter.setFragment(this);
         View view = getView();
         this.recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewHomeVisitorDestinationList);
         this.recyclerView.setHasFixedSize(true);
