@@ -1,11 +1,12 @@
 package mada.android.tools.ws;
 
+import mada.android.BuildConfig;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClientInstance {
     private static Retrofit retrofit = null;
-    private static final String BASE_URL = "http://192.168.43.137:3000";
+    private static final String BASE_URL = BuildConfig.API_BASE_URL;
 
     public static Retrofit getRetrofitInstance(){
         if (retrofit == null){
