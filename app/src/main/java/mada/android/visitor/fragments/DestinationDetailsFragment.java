@@ -11,7 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import mada.android.R;
-import mada.android.models.Destination;
+import mada.android.models.destination.Destination;
 
 /**
  * A simple {@link Fragment} subclass.

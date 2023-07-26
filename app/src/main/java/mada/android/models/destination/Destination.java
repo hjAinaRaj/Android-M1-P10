@@ -1,16 +1,25 @@
-package mada.android.models;
+package mada.android.models.destination;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Destination implements Serializable {
+    @SerializedName("_id")
     private String _id;
+    @SerializedName("title")
     private String title;
+    @SerializedName("description")
     private String description;
+    @SerializedName("content")
     private String content;
+    @SerializedName("image")
     private String image;
+    @SerializedName("video")
     private String video;
+    @SerializedName("localisation")
     private String localisation;
     public Destination(String _id, String title, String description) {
         this._id = _id;

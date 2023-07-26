@@ -1,6 +1,5 @@
 package mada.android.visitor.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,13 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mada.android.R;
-import mada.android.models.Destination;
+import mada.android.models.destination.Destination;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
 
 
