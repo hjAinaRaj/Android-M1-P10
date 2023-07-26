@@ -1,5 +1,6 @@
 package mada.android.commons.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import mada.android.R;
+import mada.android.administrator.activities.home.HomeAdminActivity;
 import mada.android.commons.activities.AuthActivity;
+import mada.android.models.config.Constant;
 import mada.android.models.users.User;
 import mada.android.models.users.UserToken;
 import mada.android.services.UserService;
@@ -75,8 +78,12 @@ public class LoginFragment extends BaseFragment {
                         @Override
                         public void onResponse(Call<UserToken> call, Response<UserToken> response) {
                             UserToken userToken = response.body();
-                            TokenUtilities.saveToken(new AuthActivity(), userToken.getToken());
-                            startNewActivity(v, new HomeVisitorActivity());
+                            TokenUtilities.saveToken(getActivity(), userToken.getToken());
+                            Activity startingActivity = new HomeVisitorActivity();
+                            if(userToken.getUser().getRoleId() == Constant.ROLE_ADMIN){
+                                startingActivity = new HomeAdminActivity();
+                            }
+                            startNewActivity(v, startingActivity);
                         }
 
                         @Override

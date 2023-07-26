@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mada"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".administrator.activities.home.HomeAdminActivity"
+            android:exported="false" />
         <activity
             android:name=".visitor.activities.home.HomeVisitorActivity"
             android:exported="true"
