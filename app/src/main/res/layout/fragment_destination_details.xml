@@ -18,7 +18,7 @@
         <!-- cover image -->
 
         <ImageView
-            android:id="@+id/id_cover_image"
+            android:id="@+id/destinationItemImage"
             android:layout_width="match_parent"
             android:layout_height="263dp"
             android:background="@drawable/destination_img"

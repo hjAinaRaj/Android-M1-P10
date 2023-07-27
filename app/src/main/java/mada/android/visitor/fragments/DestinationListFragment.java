@@ -1,5 +1,6 @@
 package mada.android.visitor.fragments;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,9 +9,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import mada.android.R;
 import mada.android.models.destination.Destination;
 import mada.android.models.destination.DestinationList;
 import mada.android.services.DestinationService;
+import mada.android.tools.Base64Helper;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -121,7 +125,7 @@ public class DestinationListFragment extends Fragment  implements DestinationAda
     }
 }
 
- class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.ViewHolder> {
+ class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.DestinationViewHolder> {
 
     private List<Destination> destinationList;
     private OnItemClickListener clickListener;
@@ -133,18 +137,16 @@ public class DestinationListFragment extends Fragment  implements DestinationAda
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DestinationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_destination_item, parent, false);
-        return new ViewHolder(view);
+        return new DestinationViewHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DestinationViewHolder holder, int position) {
         Destination destination = destinationList.get(position);
-        holder.titleTextView.setText(destination.getTitle());
-        holder.descriptionTextView.setText(destination.getDescription());
-
+        holder.bindData(destination);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,15 +160,25 @@ public class DestinationListFragment extends Fragment  implements DestinationAda
         return destinationList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class DestinationViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TextView descriptionTextView;
+        ImageView imageView;
 
-        ViewHolder(View itemView) {
+        DestinationViewHolder(View itemView) {
             super(itemView);
 
             titleTextView = itemView.findViewById(R.id.destinationTitleTextView);
             descriptionTextView = itemView.findViewById(R.id.destinationDescriptionTextView);
+            imageView = itemView.findViewById(R.id.destinationItemImage);
+        }
+        void bindData(Destination destination) {
+            this.titleTextView.setText(destination.getTitle());
+            this.descriptionTextView.setText(destination.getDescription());
+            Log.d("debug", ""+destination.getImage().length());
+            Bitmap decodedBitmap = Base64Helper.decodeBase64ToBitmap(destination.getImage());
+            this.imageView.setImageBitmap(decodedBitmap);
+
         }
     }
     interface OnItemClickListener {
