@@ -21,4 +21,7 @@
     <string name="have_account">Déjà un compte?</string>
     <string name="show_more">Voir plus</string>
     <string name="logout">Se déconnecter</string>
+    <string name="notification_channel_id">Channel ID</string>
+    <string name="notification_channel_title">Channel Title</string>
+    <string name="notification_channel_description">Description of this channel</string>
 </resources>
