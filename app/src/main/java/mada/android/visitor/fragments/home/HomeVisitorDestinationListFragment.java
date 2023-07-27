@@ -64,7 +64,7 @@ public class HomeVisitorDestinationListFragment extends BaseFragment {
         this.buttonShowMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(R.id.fragmentContainerViewHomeVisitor, new DestinationListFragment());
+                replaceFragment(R.id.fragmentContainerViewHomeVisitor, DestinationListFragment.newInstance());
             }
         });
     }

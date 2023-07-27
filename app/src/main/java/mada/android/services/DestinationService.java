@@ -22,4 +22,8 @@ public class DestinationService {
         Call<DestinationList> call = destinationInterface.get();
         return call;
     }
+    public Call<Destination> get(String id) throws Exception{
+        Call<Destination> call = destinationInterface.getItemById(id);
+        return call;
+    }
 }

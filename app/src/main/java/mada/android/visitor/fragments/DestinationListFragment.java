@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class DestinationListFragment extends Fragment  implements DestinationAdapter.OnItemClickListener{
+public class DestinationListFragment extends Fragment implements DestinationAdapter.OnItemClickListener{
 
     private List<Destination> destinationList;
     private RecyclerView recyclerView;
@@ -118,9 +119,11 @@ public class DestinationListFragment extends Fragment  implements DestinationAda
     public void onItemClick(int position) {
 
         if (getActivity() instanceof HomeVisitorActivity) {
-            ((HomeVisitorActivity) getActivity()).replaceFragment(
+            FragmentTransaction ft = ((HomeVisitorActivity) getActivity()).getSupportFragmentManager().beginTransaction();
+            ft.replace(
                     R.id.fragmentContainerViewHomeVisitor,
-                    DestinationDetailsFragment.newInstance(this.destinationList.get(position)));
+                    DestinationDetailsFragment.newInstance(this.destinationList.get(position).get_id()));
+            ft.commit();
         }
     }
 }
@@ -173,11 +176,17 @@ public class DestinationListFragment extends Fragment  implements DestinationAda
             imageView = itemView.findViewById(R.id.destinationItemImage);
         }
         void bindData(Destination destination) {
-            this.titleTextView.setText(destination.getTitle());
-            this.descriptionTextView.setText(destination.getDescription());
-            Log.d("debug", ""+destination.getImage().length());
-            Bitmap decodedBitmap = Base64Helper.decodeBase64ToBitmap(destination.getImage());
-            this.imageView.setImageBitmap(decodedBitmap);
+            try{
+                this.titleTextView.setText(destination.getTitle());
+                this.descriptionTextView.setText(destination.getDescription());
+                Log.d("debug", ""+destination.getImage().length());
+
+                    Bitmap decodedBitmap = Base64Helper.decodeBase64ToBitmap(destination.getImage());
+                    this.imageView.setImageBitmap(decodedBitmap);
+            }catch(Exception e){
+                Log.e("custom-error","----------------------"+e.getMessage());
+            }
+
 
         }
     }

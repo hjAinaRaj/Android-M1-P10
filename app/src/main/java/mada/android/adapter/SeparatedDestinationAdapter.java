@@ -45,7 +45,7 @@ public class SeparatedDestinationAdapter extends RecyclerView.Adapter<SeparatedD
                 getFragment()
                         .replaceFragment(
                                 R.id.fragmentContainerViewHomeVisitor,
-                                DestinationDetailsFragment.newInstance(destinationDataList));
+                                DestinationDetailsFragment.newInstance(destinationDataList.get_id()));
             }
         });
     }

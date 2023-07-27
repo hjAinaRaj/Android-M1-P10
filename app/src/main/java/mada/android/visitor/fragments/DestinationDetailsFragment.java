@@ -1,17 +1,28 @@
 package mada.android.visitor.fragments;
 
+
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import mada.android.R;
 import mada.android.models.destination.Destination;
+import mada.android.services.DestinationService;
+import mada.android.tools.Base64Helper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,17 +31,23 @@ import mada.android.models.destination.Destination;
  */
 public class DestinationDetailsFragment extends Fragment {
     private WebView webView;
-    private Destination destination;
+    private TextView titleTextView;
+    private TextView descriptionTextView;
+    private ImageView destinationImageView;
+    private String destinationId;
+    private DestinationService service;
+    private static final String ARG_DESTINATION_ID = "ARG_DESTINATION_ID";
 
     public DestinationDetailsFragment() {
         // Required empty public constructor
-    }
+        service = new DestinationService();    }
 
 
-    public static DestinationDetailsFragment newInstance(Destination destination) {
+    public static  Fragment newInstance(String destinationId) {
         DestinationDetailsFragment fragment = new DestinationDetailsFragment();
         Bundle args = new Bundle();
-        fragment.destination = destination;
+        args.putString(ARG_DESTINATION_ID, destinationId);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -38,7 +55,10 @@ public class DestinationDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+           this.destinationId = getArguments().getString(ARG_DESTINATION_ID);
 
+        }
 
 
     }
@@ -49,35 +69,41 @@ public class DestinationDetailsFragment extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_destination_details, container, false);
         webView =  view.findViewById(R.id.destinationDetailsWebView);
+        this.titleTextView =  view.findViewById(R.id.destinationDetailsTitle);
+        this.descriptionTextView = view.findViewById(R.id.destinationDetailsDescription);
+        this.destinationImageView = view.findViewById(R.id.destinationItemImage);
 
-        // Enable JavaScript
-        //webView.getSettings().setJavaScriptEnabled(true);
+        DestinationDetailsFragment fragment = this;
 
-        // Load and display the HTML content
-        String htmlContent = "<html>" +
-                "<body>\n" +
-                "    <h2>Rova of Manjakamiadana</h2>\n" +
-                "    <p>\n" +
-                "        The Rova of Manjakamiadana, also known as the Queen's Palace or the Royal Palace of Antananarivo,\n" +
-                "        is a historic palace located in Antananarivo, Madagascar. It served as the residence of the\n" +
-                "        sovereigns of the Kingdom of Madagascar during the 17th and 18th centuries.\n" +
-                "    </p>\n" +
-                "    <p>\n" +
-                "        The palace complex is perched on the highest hill in the city, providing a commanding view\n" +
-                "        of Antananarivo. It features traditional Merina architecture and is characterized by its\n" +
-                "        distinctive wooden balconies and steep roofs.\n" +
-                "    </p>\n" +
-                "    <p>\n" +
-                "        The Rova of Manjakamiadana was severely damaged by a fire in 1995, but restoration efforts\n" +
-                "        have been ongoing to preserve this important historical site.\n" +
-                "    </p>\n" +
-                "    <p>\n" +
-                "        Visitors can explore the Rova to learn about the rich history of Madagascar and its royal heritage.\n" +
-                "        It remains a symbol of national identity and a cultural treasure for the people of Madagascar.\n" +
-                "    </p>\n" +
-                "</body>" +
-                "</html>";
-        webView.loadData(htmlContent, "text/html", "UTF-8");
+        // TODO: Use the destinationId to fetch the destination details
+try{
+        Call<Destination> call = this.service.get(this.destinationId);
+        call.enqueue(new Callback<Destination>() {
+            @Override
+            public void onResponse(Call<Destination> call, Response<Destination> response) {
+                if(response.code() != 200)
+                    Toast.makeText(view.getContext(), "Destination server error", Toast.LENGTH_SHORT).show();
+                else{
+                    Destination destination = response.body();
+                    fragment.descriptionTextView.setText(destination.getDescription());
+                    fragment.titleTextView.setText(destination.getTitle());
+                    Bitmap decodedBitmap = Base64Helper.decodeBase64ToBitmap(destination.getImage());
+                    fragment.destinationImageView.setImageBitmap(decodedBitmap);
+
+                    webView.loadData(destination.getContent(), "text/html", "UTF-8");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Destination> call, Throwable t) {
+                Toast.makeText(view.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+}catch (Exception e){
+    Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+}
+
 
         //Handle URL clicks within the WebView
         webView.setWebViewClient(new WebViewClient());
