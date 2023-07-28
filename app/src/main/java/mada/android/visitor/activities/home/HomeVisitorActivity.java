@@ -28,8 +28,10 @@ public class HomeVisitorActivity extends BaseActivity {
     }
 
     public void initWidget(){
+        // For testing subscription an unsubscription 
         /*try {
             new MyFirebaseMessagingService().saveSavedToken();
+            //new MyFirebaseMessagingService().unsubscribeSavedToken();
         }catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }*/

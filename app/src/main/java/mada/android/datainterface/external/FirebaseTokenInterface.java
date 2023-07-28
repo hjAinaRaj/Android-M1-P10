@@ -11,4 +11,6 @@ import retrofit2.http.POST;
 public interface FirebaseTokenInterface {
     @POST("/firebase/subscribe-to-default-topic")
     Call<MessageResponse> subscribeToDefaultTopic(@Body FirebaseToken firebaseToken);
+    @POST("/firebase/unsubscribe-to-default-topic")
+    Call<MessageResponse> unsubscribeToDefaultTopic(@Body FirebaseToken firebaseToken);
 }

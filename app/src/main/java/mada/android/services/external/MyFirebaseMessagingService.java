@@ -67,12 +67,44 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
+    public void unsubscribeToken(String token){
+        try{
+            FirebaseToken firebaseToken = new FirebaseToken(token);
+            Call call = new FirebaseTokenService().unsubscribeToDefaultToken(firebaseToken);
+            call.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+                    //Toast.makeText(MyFirebaseMessagingService.this,
+                    //        "Utilisateur bien souscrit", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    Toast.makeText(MyFirebaseMessagingService.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+            //Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void saveSavedToken() throws Exception{
         MyFirebaseMessagingService.getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
             public void onComplete(@NonNull Task<String> task) {
                 String token = task.getResult();
                 saveNewToken(token);
+            }
+        });
+    }
+
+    public void unsubscribeSavedToken() throws Exception{
+        MyFirebaseMessagingService.getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                String token = task.getResult();
+                unsubscribeToken(token);
             }
         });
     }

@@ -21,4 +21,9 @@ public class FirebaseTokenService {
         Call<MessageResponse> call = firebaseTokenInterface.subscribeToDefaultTopic(firebaseToken);
         return call;
     }
+
+    public Call<MessageResponse> unsubscribeToDefaultToken(FirebaseToken firebaseToken) throws Exception{
+        Call<MessageResponse> call = firebaseTokenInterface.unsubscribeToDefaultTopic(firebaseToken);
+        return call;
+    }
 }
