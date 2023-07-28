@@ -3,6 +3,7 @@ package mada.android.services;
 import java.util.List;
 
 import mada.android.datainterface.DestinationInterface;
+import mada.android.models.defaultResponses.MessageResponse;
 import mada.android.models.destination.Destination;
 import mada.android.models.destination.DestinationList;
 import mada.android.tools.ws.RetrofitClientInstance;
@@ -24,6 +25,11 @@ public class DestinationService {
     }
     public Call<Destination> get(String id) throws Exception{
         Call<Destination> call = destinationInterface.getItemById(id);
+        return call;
+    }
+
+    public Call<MessageResponse> post(Destination destination) throws Exception{
+        Call<MessageResponse> call = destinationInterface.post(destination);
         return call;
     }
 }

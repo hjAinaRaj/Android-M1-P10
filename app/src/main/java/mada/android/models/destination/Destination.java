@@ -21,6 +21,10 @@ public class Destination implements Serializable {
     private String video;
     @SerializedName("localisation")
     private String localisation;
+
+    public Destination() {
+    }
+
     public Destination(String _id, String title, String description) {
         this._id = _id;
         this.title = title;
