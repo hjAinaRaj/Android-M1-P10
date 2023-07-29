@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable-v24/bg_btn_search_layout.xml" value="0.13385416666666666" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable-v24/bg_recat.xml" value="0.15052083333333333" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.115625" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable-v24/ic_search.xml" value="0.17962962962962964" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/ic_launcher_background.xml" value="0.115625" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/splash_screen.xml" value="0.15989583333333332" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/activity_destination_details.xml" value="0.134375" />
@@ -15,7 +17,7 @@
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_blank.xml" value="0.1" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_destination_details.xml" value="0.31564245810055863" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_destination_item.xml" value="0.22" />
-        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_destination_list.xml" value="0.2" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_destination_list.xml" value="0.33" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_home_visitor.xml" value="0.134375" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_home_visitor_destination_list.xml" value="0.25" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/main_activity.xml" value="0.14375" />
