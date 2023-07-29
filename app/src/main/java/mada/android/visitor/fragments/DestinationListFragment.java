@@ -1,10 +1,12 @@
 package mada.android.visitor.fragments;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,7 +16,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +66,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_destination_list, container, false);
-
+        addFavoritesRadio(view);
         getList(view);
 
         return view;
@@ -125,6 +131,66 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
                     DestinationDetailsFragment.newInstance(this.destinationList.get(position).get_id()));
             ft.commit();
         }
+    }
+    private RadioGroup favoritesRadioGroup;
+    private void addFavoritesRadio(View view){
+        Context context = getContext();
+        favoritesRadioGroup = new RadioGroup(context);
+        favoritesRadioGroup.setId(View.generateViewId());
+        LinearLayout.LayoutParams radioGroupParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+
+        radioGroupParams.setMargins(dpToPx(context, 8), dpToPx(context, 60), dpToPx(context, 8), dpToPx(context, 8));
+        favoritesRadioGroup.setLayoutParams(radioGroupParams);
+        favoritesRadioGroup.setGravity(android.view.Gravity.CENTER_HORIZONTAL);
+        favoritesRadioGroup.setOrientation(RadioGroup.HORIZONTAL);
+
+        LinearLayout.LayoutParams radioButtonParams = new LinearLayout.LayoutParams(
+                dpToPx(context, 120), // Replace with the appropriate dimension in pixels
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+// Create the first RadioButton
+        RadioButton radioButton0 = new RadioButton(context);
+        radioButton0.setId(View.generateViewId());
+
+        radioButton0.setLayoutParams(radioButtonParams);
+        radioButton0.setBackground(ContextCompat.getDrawable(context, R.drawable.radio_flat_selector)); // Replace with the appropriate drawable
+        radioButton0.setButtonDrawable(android.R.color.transparent);
+        radioButton0.setChecked(true);
+        radioButton0.setPadding(dpToPx(context, 16), dpToPx(context, 3), dpToPx(context, 16), dpToPx(context, 3));
+        radioButton0.setText("All");
+        radioButton0.setTextColor(ContextCompat.getColorStateList(context, R.color.radio_flat_text_selector)); // Replace with the appropriate color selector
+
+// Create the second RadioButton
+        RadioButton radioButton1 = new RadioButton(context);
+        radioButton1.setId(View.generateViewId());
+        radioButton1.setLayoutParams(radioButtonParams);
+        radioButton1.setBackground(ContextCompat.getDrawable(context, R.drawable.radio_flat_selector)); // Replace with the appropriate drawable
+        radioButton1.setButtonDrawable(android.R.color.transparent);
+        radioButton1.setPadding(dpToPx(context, 16), dpToPx(context, 3), dpToPx(context, 16), dpToPx(context, 3));
+        radioButton1.setText("Favorites");
+        radioButton1.setTextColor(ContextCompat.getColorStateList(context, R.color.radio_flat_text_selector)); // Replace with the appropriate color selector
+
+// Add the RadioButtons to the RadioGroup
+        favoritesRadioGroup.addView(radioButton0);
+        favoritesRadioGroup.addView(radioButton1);
+
+// Now, you can add the RadioGroup to your desired parent view or layout
+        FrameLayout parentLayout = view.findViewById(R.id.destinationListMainLayout); // Replace with the ID of your parent layout
+        parentLayout.addView(favoritesRadioGroup,1);
+        RecyclerView rv = view.findViewById(R.id.destinationRecyclerView);
+        FrameLayout.LayoutParams recyclerParams = (FrameLayout.LayoutParams) rv.getLayoutParams();
+        recyclerParams.topMargin = dpToPx(context, 100);
+        rv.setLayoutParams(recyclerParams);
+
+
+    }
+
+    private int dpToPx(Context context, int dp) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
     }
 }
 

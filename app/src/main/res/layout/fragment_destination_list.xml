@@ -3,6 +3,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/destinationListMainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".visitor.fragments.DestinationListFragment">
@@ -34,7 +35,7 @@
             android:hint="Search"
             android:maxLines="6"
             android:paddingLeft="10dp"
-            android:textColor="#D87CC576" />
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="wrap_content"
