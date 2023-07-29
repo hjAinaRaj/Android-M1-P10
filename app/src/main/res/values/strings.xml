@@ -24,4 +24,11 @@
     <string name="notification_channel_id">Channel ID</string>
     <string name="notification_channel_title">Channel Title</string>
     <string name="notification_channel_description">Description of this channel</string>
+    <string name="create">Créer</string>
+    <string name="image">Image</string>
+    <string name="video">Video</string>
+    <string name="title">Titre</string>
+    <string name="description">Description</string>
+    <string name="content">Contenu</string>
+    <string name="localisation">Localisation</string>
 </resources>
