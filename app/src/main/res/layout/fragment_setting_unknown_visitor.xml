@@ -51,5 +51,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/activate_night_mode" />
+
+        <Spinner
+            android:id="@+id/spinnerLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/buttonToEn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="to En" />
+
     </LinearLayout>
 </RelativeLayout>
