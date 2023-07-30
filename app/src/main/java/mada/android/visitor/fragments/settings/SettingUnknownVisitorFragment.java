@@ -2,7 +2,9 @@ package mada.android.visitor.fragments.settings;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import mada.android.services.external.MyFirebaseMessagingService;
 public class SettingUnknownVisitorFragment extends BaseFragment {
     private Button buttonToLogin;
     private Switch switchNotification;
+    private Switch switchNightMode;
     private MyFirebaseMessagingService myFirebaseMessagingService;
 
     public SettingUnknownVisitorFragment() {
@@ -47,6 +50,7 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     public void initWidget(View view){
         this.buttonToLogin = (Button) view.findViewById(R.id.buttonToLogin);
         this.switchNotification = (Switch) view.findViewById(R.id.switchNotif);
+        this.switchNightMode = (Switch) view.findViewById(R.id.switchNightMode);
         this.buttonToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,5 +72,30 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
                 }
             }
         });
+
+        this.switchNightMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                updateTheme(view, isChecked);
+            }
+        });
+    }
+
+    public void updateTheme(View view, boolean isChecked){
+        try {
+            if(isChecked){
+                // Activate night mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+            // Recréez le fragment pour appliquer immédiatement le nouveau thème
+            FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+            fragmentTransaction.detach(this);
+            fragmentTransaction.attach(this);
+            fragmentTransaction.commit();
+        }catch (Exception e){
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

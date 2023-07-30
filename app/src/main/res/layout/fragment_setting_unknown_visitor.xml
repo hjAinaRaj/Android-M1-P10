@@ -45,5 +45,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/active_notif" />
+
+        <Switch
+            android:id="@+id/switchNightMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activate_night_mode" />
     </LinearLayout>
 </RelativeLayout>
