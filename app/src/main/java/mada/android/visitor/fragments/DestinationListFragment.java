@@ -79,7 +79,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
 
     private void getList(View view){
         try {
-            Call<DestinationList> call = service.get();
+            Call<DestinationList> call = service.getForConnectedUser("63d2b4a91771a6aefbad9022");
             DestinationListFragment fragment = this;
             call.enqueue(new Callback<DestinationList>() {
                 @Override
