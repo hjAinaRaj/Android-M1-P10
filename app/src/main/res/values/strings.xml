@@ -31,4 +31,6 @@
     <string name="description">Description</string>
     <string name="content">Contenu</string>
     <string name="localisation">Localisation</string>
+    <string name="active_notif">Activer la notification</string>
+    <string name="activate_night_mode">Activer mode nuit</string>
 </resources>
