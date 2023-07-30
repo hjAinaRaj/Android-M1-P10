@@ -26,14 +26,18 @@ import mada.android.R;
 import mada.android.commons.activities.AuthActivity;
 import mada.android.commons.fragments.BaseFragment;
 import mada.android.services.external.MyFirebaseMessagingService;
+import mada.android.tools.token.SharedPreferencesUtilities;
 
 public class SettingUnknownVisitorFragment extends BaseFragment {
+    public final static String NOTIF_KEY = "notif_key";
+    public final static String NIGHT_MODE_KEY = "night_mode_key";
     private Button buttonToLogin;
     private Switch switchNotification;
     private Switch switchNightMode;
     private Spinner spinnerLanguage;
     private Button buttonToEn;
     private MyFirebaseMessagingService myFirebaseMessagingService;
+    private boolean isUpdatingTheme = false;
 
     public SettingUnknownVisitorFragment() {
         // Required empty public constructor
@@ -59,8 +63,8 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
 
     public void initWidget(View view){
         this.buttonToLogin = (Button) view.findViewById(R.id.buttonToLogin);
-        this.switchNotification = (Switch) view.findViewById(R.id.switchNotif);
-        this.switchNightMode = (Switch) view.findViewById(R.id.switchNightMode);
+        this.initNotificationSwitch(view);
+        this.initNightMode(view);
         this.spinnerLanguage = (Spinner) view.findViewById(R.id.spinnerLanguage);
         this.buttonToEn = (Button) view.findViewById(R.id.buttonToEn);
 
@@ -77,40 +81,18 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
             }
         });
 
-        this.switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                try {
-                    if(isChecked){
-                        myFirebaseMessagingService.saveSavedToken();
-                    }else{
-                        myFirebaseMessagingService.unsubscribeSavedToken();
-                    }
-                }catch (Exception e){
-                    Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        this.switchNightMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateTheme(view, isChecked);
-            }
-        });
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this.getContext(),
                 R.array.language_arrays,
                 android.R.layout.simple_spinner_item
         );
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
         // Apply the adapter to the spinner
-        spinnerLanguage.setAdapter(adapter);
-        spinnerLanguage.setSelection(0);
+        /*spinnerLanguage.setAdapter(adapter);
+        spinnerLanguage.setSelection(0);*/
 
-        spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Récupérez la langue sélectionnée
@@ -124,6 +106,53 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });*/
+    }
+
+    public void initNotificationSwitch(View view){
+        this.switchNotification = (Switch) view.findViewById(R.id.switchNotif);
+        boolean defaultValue = SharedPreferencesUtilities.
+                loadDataBoolean(getActivity(), NOTIF_KEY, false);
+        this.switchNotification.setChecked(defaultValue);
+        this.switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                try {
+                    if(isChecked){
+                        myFirebaseMessagingService.saveSavedToken();
+                    }else{
+                        myFirebaseMessagingService.unsubscribeSavedToken();
+                    }
+                    SharedPreferencesUtilities.saveDataBoolean(getActivity(), NOTIF_KEY, isChecked);
+                }catch (Exception e){
+                    Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public void initNightMode(View view){
+        this.switchNightMode = (Switch) view.findViewById(R.id.switchNightMode);
+        boolean nightModeChecked = SharedPreferencesUtilities.loadDataBoolean(
+                getActivity(), NIGHT_MODE_KEY, false
+        );
+        this.switchNightMode.setChecked(nightModeChecked);
+        updateTheme(view, nightModeChecked);
+        this.switchNightMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isUpdatingTheme) {
+                    return;
+                }
+                isUpdatingTheme = true;
+                updateTheme(view, isChecked);
+                SharedPreferencesUtilities.saveDataBoolean(
+                        getActivity(),
+                        NIGHT_MODE_KEY,
+                        isChecked
+                );
+                isUpdatingTheme = false;
             }
         });
     }
@@ -143,15 +172,13 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
         try {
             if(isChecked){
                 // Activate night mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                getActivity().setTheme(R.style.Theme_Mada_dark);
             }else{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                getActivity().setTheme(R.style.Theme_Mada);
+                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
-            // Recréez le fragment pour appliquer immédiatement le nouveau thème
-            FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-            fragmentTransaction.detach(this);
-            fragmentTransaction.attach(this);
-            fragmentTransaction.commit();
+            //getActivity().recreate();
         }catch (Exception e){
             Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }

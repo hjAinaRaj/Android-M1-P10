@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Mada" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Mada_dark" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/black</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

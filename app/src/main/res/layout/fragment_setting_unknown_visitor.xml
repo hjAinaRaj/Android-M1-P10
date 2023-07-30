@@ -22,24 +22,6 @@
             android:text="@string/login"
             app:cornerRadius="12dp" />
 
-        <TextView
-            android:id="@+id/contactUs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/contact" />
-
-        <TextView
-            android:id="@+id/nightMode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/nightMode" />
-
-        <TextView
-            android:id="@+id/language"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/language" />
-
         <Switch
             android:id="@+id/switchNotif"
             android:layout_width="match_parent"
