@@ -19,3 +19,4 @@ android.useAndroidX=true
 android.enableJetifier=true
 
 apiBaseUrl=http://192.168.43.27:3000
+youtubeApiKey=AIzaSyCnRvkcmygezxf9w_pj2lQSwI6JUUVnpXM
