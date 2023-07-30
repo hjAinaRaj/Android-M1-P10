@@ -22,6 +22,8 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import mada.android.R;
 import mada.android.commons.YoutubeWebClient;
@@ -60,7 +62,11 @@ public class DestinationDetailsFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+    private void loadActionFragment(boolean initIsFavorite, String destinationId){
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.destinationDetailsActionContainer, DestinationActionFragment.newInstance(initIsFavorite, destinationId));
+        fragmentTransaction.commit();
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +103,7 @@ try{
                     Destination destination = response.body();
                     fragment.descriptionTextView.setText(destination.getDescription());
                     fragment.titleTextView.setText(destination.getTitle());
-
+                    loadActionFragment(destination.isFavorite(), destinationId);
                     Bitmap decodedBitmap = Base64Helper.decodeBase64ToBitmap(destination.getImage());
                     fragment.destinationImageView.setImageBitmap(decodedBitmap);
 

@@ -22,6 +22,9 @@ public class Destination implements Serializable {
     @SerializedName("localisation")
     private String localisation;
 
+    @SerializedName("isFavorite")
+    private boolean isFavorite;
+
     public Destination() {
     }
 
@@ -45,6 +48,15 @@ public class Destination implements Serializable {
 
         return destinations;
     }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
     public String get_id() {
         return _id;
     }

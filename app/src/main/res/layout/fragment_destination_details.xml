@@ -75,6 +75,17 @@
                         android:textSize="18sp"
                         tools:ignore="HardcodedText" />
 
+                    <FrameLayout
+                        android:id="@+id/destinationDetailsActionContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/destinationDetailsDescription"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp">
+
+                    </FrameLayout>
+
 
                 </RelativeLayout>
 
@@ -113,7 +124,7 @@
         </LinearLayout>
 
 
-        <!-- Name And Description  -->
+
 
     </RelativeLayout>
 
