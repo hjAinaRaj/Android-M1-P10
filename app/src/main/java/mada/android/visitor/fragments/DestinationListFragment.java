@@ -1,5 +1,6 @@
 package mada.android.visitor.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -8,11 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,7 +96,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-                        destinationAdapter = new DestinationAdapter(fragment.destinationList, fragment);
+                        destinationAdapter = new DestinationAdapter(getChildFragmentManager(), fragment.destinationList, fragment);
                         recyclerView.setAdapter(destinationAdapter);
 
                     }
@@ -198,8 +203,10 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
 
     private List<Destination> destinationList;
     private OnItemClickListener clickListener;
+    private FragmentManager fragmentManager;
 
-    public DestinationAdapter(List<Destination> destinationList, OnItemClickListener clickListener) {
+    public DestinationAdapter( FragmentManager fragmentManager, List<Destination> destinationList, OnItemClickListener clickListener) {
+       this.fragmentManager =  fragmentManager;
         this.destinationList = destinationList;
         this.clickListener = clickListener;
     }
@@ -215,13 +222,8 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     @Override
     public void onBindViewHolder(@NonNull DestinationViewHolder holder, int position) {
         Destination destination = destinationList.get(position);
-        holder.bindData(destination);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickListener.onItemClick(holder.getAdapterPosition());
-            }
-        });
+        holder.bindData(fragmentManager, destination);
+
     }
 
     @Override
@@ -230,25 +232,64 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     }
 
     class DestinationViewHolder extends RecyclerView.ViewHolder {
+        int destinationItemActionContainerId;
         TextView titleTextView;
         TextView descriptionTextView;
         ImageView imageView;
 
+        TextView viewMoreTxtView;
+        boolean isFavorite = false;
+        FrameLayout actionContainer ;
+
+        private void loadActionFragment( FragmentManager fragmentManager,boolean initIsFavorite, String destinationId){
+
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(destinationItemActionContainerId, DestinationActionFragment.newInstance(initIsFavorite, destinationId));
+            fragmentTransaction.commit();
+
+        }
         DestinationViewHolder(View itemView) {
             super(itemView);
 
             titleTextView = itemView.findViewById(R.id.destinationTitleTextView);
             descriptionTextView = itemView.findViewById(R.id.destinationDescriptionTextView);
             imageView = itemView.findViewById(R.id.destinationItemImage);
+
+            viewMoreTxtView = itemView.findViewById(R.id.destinationViewMoreBtn);
+            destinationItemActionContainerId = View.generateViewId();
+            actionContainer = itemView.findViewById(destinationItemActionContainerId);
+
+
+            actionContainer = new FrameLayout(itemView.getContext());
+            actionContainer.setId(destinationItemActionContainerId);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT
+            );
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+            layoutParams.setMargins(8, 0, 8, 8);
+            actionContainer.setLayoutParams(layoutParams);
+            RelativeLayout mainLayout = itemView.findViewById(R.id.destinationItemMainContainer);
+            mainLayout.addView(actionContainer);
+
         }
-        void bindData(Destination destination) {
+        void bindData(FragmentManager fragmentManager, Destination destination) {
             try{
                 this.titleTextView.setText(destination.getTitle());
                 this.descriptionTextView.setText(destination.getDescription());
-                Log.d("debug", ""+destination.getImage().length());
 
-                    Bitmap decodedBitmap = Base64Helper.decodeBase64ToBitmap(destination.getImage());
-                    this.imageView.setImageBitmap(decodedBitmap);
+                loadActionFragment(fragmentManager, false, destination.get_id());
+
+                Bitmap decodedBitmap = Base64Helper.decodeBase64ToBitmap(destination.getImage());
+                this.imageView.setImageBitmap(decodedBitmap);
+
+                viewMoreTxtView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        clickListener.onItemClick(getAdapterPosition());
+                    }
+                });
             }catch(Exception e){
                 Log.e("custom-error","----------------------"+e.getMessage());
             }
