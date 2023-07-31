@@ -79,7 +79,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
 
     private void getList(View view){
         try {
-            Call<DestinationList> call = service.getForConnectedUser("63d2b4a91771a6aefbad9022");
+            Call<DestinationList> call = service.getForConnectedUser();
             DestinationListFragment fragment = this;
             call.enqueue(new Callback<DestinationList>() {
                 @Override
@@ -241,8 +241,8 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         boolean isFavorite = false;
         FrameLayout actionContainer ;
 
-        private void loadActionFragment( FragmentManager fragmentManager,boolean initIsFavorite, String destinationId){
-
+        private void loadActionFragment( FragmentManager fragmentManager,Boolean initIsFavorite, String destinationId){
+            if(initIsFavorite == null) return;
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(destinationItemActionContainerId, DestinationActionFragment.newInstance(initIsFavorite, destinationId));
             fragmentTransaction.commit();
@@ -279,7 +279,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
                 this.titleTextView.setText(destination.getTitle());
                 this.descriptionTextView.setText(destination.getDescription());
 
-                loadActionFragment(fragmentManager, false, destination.get_id());
+                loadActionFragment(fragmentManager, destination.isFavorite(), destination.get_id());
 
                 Bitmap decodedBitmap = Base64Helper.decodeBase64ToBitmap(destination.getImage());
                 this.imageView.setImageBitmap(decodedBitmap);

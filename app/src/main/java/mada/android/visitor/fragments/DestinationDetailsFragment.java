@@ -62,7 +62,8 @@ public class DestinationDetailsFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    private void loadActionFragment(boolean initIsFavorite, String destinationId){
+    private void loadActionFragment(Boolean initIsFavorite, String destinationId){
+        if(initIsFavorite == null) return;
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.destinationDetailsActionContainer, DestinationActionFragment.newInstance(initIsFavorite, destinationId));
         fragmentTransaction.commit();

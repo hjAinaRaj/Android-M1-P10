@@ -19,8 +19,8 @@ public interface DestinationInterface {
     @GET("/destination")
     Call<DestinationList> get();
 
-    @GET("/destination/user/{id}")
-    Call<DestinationList> getForConnectedUser(@Path("id") String userId,@QueryMap Map<String, String> filters);
+    @GET("/destination")
+    Call<DestinationList> getForConnectedUser(@QueryMap Map<String, String> filters);
 
     @GET("destination/{id}")
     Call<Destination> getItemById(@Path("id") String itemId);

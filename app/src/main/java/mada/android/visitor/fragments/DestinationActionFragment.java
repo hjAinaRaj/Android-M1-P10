@@ -4,13 +4,22 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import mada.android.R;
+import mada.android.models.defaultResponses.MessageResponse;
+import mada.android.models.destination.DestinationList;
+import mada.android.services.DestinationService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,18 +28,20 @@ import mada.android.R;
  */
 public class DestinationActionFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
+
     private static final String ARG_INIT_IS_FAVORITE = "ARG_INIT_IS_FAVORITE";
     private static final String ARG_DESTINATION_ID = "ARG_DESTINATION_ID";
+    private DestinationService service;
 
-    // TODO: Rename and change types of parameters
     private boolean initIsFavorite;
     private String destinationId;
 
     private boolean isFavorite;
 
     public DestinationActionFragment() {
-        // Required empty public constructor
+        if(service == null) {
+            service = new DestinationService();
+        }
     }
 
 
@@ -60,17 +71,47 @@ public class DestinationActionFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_destination_action, container, false);
         ImageView favoriteImgView = v.findViewById(R.id.destinationFavImg);
-        favoriteImgView.setImageDrawable(ContextCompat.getDrawable(v.getContext(), R.drawable.ic_heart));
+        favoriteImgView.setImageDrawable(ContextCompat.getDrawable(v.getContext(), isFavorite? R.drawable.ic_favorite_heart : R.drawable.ic_heart));
         favoriteImgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isFavorite = !isFavorite;
-                if(isFavorite)
-                    favoriteImgView.setImageDrawable(ContextCompat.getDrawable(v.getContext(), R.drawable.ic_favorite_heart));
-                else
-                    favoriteImgView.setImageDrawable(ContextCompat.getDrawable(v.getContext(), R.drawable.ic_heart));
+                try{
+                    isFavorite = !isFavorite;
+
+
+                    if(isFavorite)
+                        favoriteImgView.setImageDrawable(ContextCompat.getDrawable(v.getContext(), R.drawable.ic_favorite_heart));
+                    else
+                        favoriteImgView.setImageDrawable(ContextCompat.getDrawable(v.getContext(), R.drawable.ic_heart));
+                    Call<MessageResponse> call = isFavorite ? service.addFavorite(destinationId): service.removeFavorite(destinationId);
+
+                    call.enqueue(new Callback<MessageResponse>() {
+                        @Override
+                        public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                            if(response.code() != 200)
+                                Toast.makeText(v.getContext(), "FavoriteDestination server error", Toast.LENGTH_SHORT).show();
+                            else{
+                                String successTxt = isFavorite? "Added to favorites": "Removed from favorites";
+                                Toast.makeText(v.getContext(),successTxt,Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<MessageResponse> call, Throwable t) {
+                            Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }catch (Exception e){
+                    Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         return v;
     }
+
+
 }
