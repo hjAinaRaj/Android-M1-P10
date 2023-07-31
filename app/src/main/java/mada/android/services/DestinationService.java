@@ -34,11 +34,7 @@ public class DestinationService {
         return call;
     }
 
-    public Call<DestinationList> getForConnectedUser() throws Exception{
-        //FilterItem favoritesOnly = new FilterItem("isFavorite", "=", false, "boolean");
-        List<FilterItem> filter = new ArrayList<FilterItem>() {{
-
-        }};
+    public Call<DestinationList> getForConnectedUser( List<FilterItem> filter) throws Exception{
 
         Call<DestinationList> call = destinationInterface.getForConnectedUser(FilterItem.generateMap(filter));
         return call;

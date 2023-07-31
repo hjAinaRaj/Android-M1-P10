@@ -20,6 +20,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +30,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +40,8 @@ import mada.android.models.destination.Destination;
 import mada.android.models.destination.DestinationList;
 import mada.android.services.DestinationService;
 import mada.android.tools.Base64Helper;
+import mada.android.tools.ws.CustomCallback;
+import mada.android.tools.ws.FilterItem;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +54,8 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     private RecyclerView recyclerView;
     private DestinationAdapter destinationAdapter;
     private DestinationService service;
+    private FilterItem searchFilter;
+    private FilterItem favoriteFilter;
 
     public DestinationListFragment() {
 
@@ -62,9 +69,11 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Initialize the list of destinations (you can get this list from your data source)
-        //destinationList = getDestinations();
+
+
         destinationList = new ArrayList<>();
+        searchFilter = new FilterItem("title", "like", null, "string");
+        favoriteFilter = new FilterItem("isFavorite", "=", null, "boolean");
     }
 
     @Nullable
@@ -74,33 +83,70 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         addFavoritesRadio(view);
         getList(view);
 
+        //Add search btn listener
+        TextView searchTxtView = view.findViewById(R.id.destinationSearchTxt);
+        Button searchBtn = view.findViewById(R.id.destinationSearchBtn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchFilter.setValue(searchTxtView.getText());
+                reloadList(v);
+            }
+        });
+
         return view;
     }
 
     private void getList(View view){
+        DestinationListFragment fragment = this;
+        getList(view, new CustomCallback<DestinationList>() {
+            @Override
+            public void callback(DestinationList data, View v) throws Exception {
+                DestinationList list = data;
+                destinationList = list.getData();
+                RecyclerView recyclerView = (RecyclerView)  view.findViewById(R.id.destinationRecyclerView);
+
+                recyclerView.setHasFixedSize(true);
+                recyclerView = view.findViewById(R.id.destinationRecyclerView);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+                destinationAdapter = new DestinationAdapter(getChildFragmentManager(), destinationList, fragment);
+                recyclerView.setAdapter(destinationAdapter);
+            }
+        });
+    }
+    private void reloadList(View view){
+        DestinationListFragment fragment = this;
+        getList(view, new CustomCallback<DestinationList>() {
+            @Override
+            public void callback(DestinationList list, View v) throws Exception {
+                destinationList.clear();
+                destinationList.addAll(list.getData());
+                destinationAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+    private void getList(View view, CustomCallback<DestinationList> displayCallback){
         try {
-            Call<DestinationList> call = service.getForConnectedUser();
-            DestinationListFragment fragment = this;
+            Call<DestinationList> call = service.getForConnectedUser(new ArrayList<FilterItem>(){{
+                add(searchFilter);
+                add(favoriteFilter);
+            }});
+
             call.enqueue(new Callback<DestinationList>() {
                 @Override
                 public void onResponse(Call<DestinationList> call, Response<DestinationList> response) {
-                    if(response.code() != 200)
-                        Toast.makeText(view.getContext(), "Destination server error", Toast.LENGTH_SHORT).show();
-                    else{
-                        DestinationList list = response.body();
-                        fragment.destinationList = list.getData();
-                        RecyclerView recyclerView = (RecyclerView)  view.findViewById(R.id.destinationRecyclerView);
-
-                        recyclerView.setHasFixedSize(true);
-                        recyclerView = view.findViewById(R.id.destinationRecyclerView);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-                        destinationAdapter = new DestinationAdapter(getChildFragmentManager(), fragment.destinationList, fragment);
-                        recyclerView.setAdapter(destinationAdapter);
-
+                    try {
+                        if(response.code() != 200)
+                            Toast.makeText(view.getContext(), "Destination server error", Toast.LENGTH_SHORT).show();
+                        else{
+                            DestinationList list = response.body();
+                            displayCallback.callback(list, view);
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                 }
 
                 @Override

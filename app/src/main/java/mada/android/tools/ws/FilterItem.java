@@ -21,6 +21,7 @@ public class FilterItem implements Serializable {
         Map<String, String> filtersMap = new HashMap<>();
         int i = 0;
         for(FilterItem item : items){
+            if(item.getValue() == null) continue;
             filtersMap.put("filter["+i+"][column]", item.getColumn());
             filtersMap.put("filter["+i+"][value]", item.getValue().toString());
             filtersMap.put("filter["+i+"][comparator]",  item.getComparator());
