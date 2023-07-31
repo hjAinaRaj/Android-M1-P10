@@ -20,8 +20,11 @@ import mada.android.models.config.Constant;
 import mada.android.models.users.User;
 import mada.android.models.users.UserToken;
 import mada.android.services.UserService;
+import mada.android.tools.token.SharedPreferencesUtilities;
 import mada.android.tools.token.TokenUtilities;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
+import mada.android.visitor.fragments.settings.SettingConnectedVisitorFragment;
+import mada.android.visitor.fragments.settings.SettingUnknownVisitorFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,11 +81,25 @@ public class LoginFragment extends BaseFragment {
                         @Override
                         public void onResponse(Call<UserToken> call, Response<UserToken> response) {
                             UserToken userToken = response.body();
-                            TokenUtilities.saveToken(getActivity(), userToken.getToken());
+                            SharedPreferencesUtilities.saveData(
+                                    getActivity(),
+                                    TokenUtilities.USER_TOKEN_KEY,
+                                    userToken.getToken()
+                            );
+                            SharedPreferencesUtilities.saveData(
+                                    getActivity(),
+                                    TokenUtilities.USER_NAME,
+                                    userToken.getUser().getFirstName()
+                            );
                             Activity startingActivity = new HomeVisitorActivity();
                             if(userToken.getUser().getRoleId() == Constant.ROLE_ADMIN){
                                 startingActivity = new HomeAdminActivity();
                             }
+                            String userTokenLoaded = SharedPreferencesUtilities.loadData(
+                                    getActivity(),
+                                    TokenUtilities.USER_TOKEN_KEY,
+                                    ""
+                            );
                             startNewActivity(v, startingActivity);
                         }
 

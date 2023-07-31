@@ -1,5 +1,6 @@
 package mada.android.administrator.fragments.home;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,8 @@ import android.widget.Button;
 
 import mada.android.R;
 import mada.android.commons.fragments.BaseFragment;
+import mada.android.tools.token.SharedPreferencesUtilities;
+import mada.android.tools.token.TokenUtilities;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
 
 public class SettingAdminFragment extends BaseFragment {
@@ -39,6 +42,11 @@ public class SettingAdminFragment extends BaseFragment {
         this.buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferencesUtilities.saveData(
+                        getActivity(),
+                        TokenUtilities.USER_TOKEN_KEY,
+                        ""
+                );
                 startNewActivity(v, new HomeVisitorActivity());
             }
         });
