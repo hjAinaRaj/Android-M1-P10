@@ -89,7 +89,11 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchFilter.setValue(searchTxtView.getText());
+                CharSequence searchTxtValue = searchTxtView.getText();
+                if(searchTxtValue != null && !"".equals(searchTxtValue.toString()))searchFilter.setValue(searchTxtView.getText());
+                else searchFilter.setValue(null);
+
+
                 reloadList(v);
             }
         });
@@ -184,6 +188,9 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         }
     }
     private RadioGroup favoritesRadioGroup;
+    private int allRadioBtnId;
+    private int favoritesRadioBtnId;
+
     private void addFavoritesRadio(View view){
         Context context = getContext();
         favoritesRadioGroup = new RadioGroup(context);
@@ -204,7 +211,8 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         );
 // Create the first RadioButton
         RadioButton radioButton0 = new RadioButton(context);
-        radioButton0.setId(View.generateViewId());
+        allRadioBtnId = View.generateViewId();
+        radioButton0.setId(allRadioBtnId);
 
         radioButton0.setLayoutParams(radioButtonParams);
         radioButton0.setBackground(ContextCompat.getDrawable(context, R.drawable.radio_flat_selector)); // Replace with the appropriate drawable
@@ -216,7 +224,8 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
 
 // Create the second RadioButton
         RadioButton radioButton1 = new RadioButton(context);
-        radioButton1.setId(View.generateViewId());
+        favoritesRadioBtnId = View.generateViewId();
+        radioButton1.setId(favoritesRadioBtnId);
         radioButton1.setLayoutParams(radioButtonParams);
         radioButton1.setBackground(ContextCompat.getDrawable(context, R.drawable.radio_flat_selector)); // Replace with the appropriate drawable
         radioButton1.setButtonDrawable(android.R.color.transparent);
@@ -236,6 +245,19 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         recyclerParams.topMargin = dpToPx(context, 100);
         rv.setLayoutParams(recyclerParams);
 
+        favoritesRadioGroup.check(allRadioBtnId);
+
+        favoritesRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+               if(checkedId == favoritesRadioBtnId){
+                   favoriteFilter.setValue("true");
+               }else{
+                   favoriteFilter.setValue(null);
+               }
+               reloadList(view);
+            }
+        });
 
     }
 
