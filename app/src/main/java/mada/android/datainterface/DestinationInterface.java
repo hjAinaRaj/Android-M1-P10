@@ -20,7 +20,7 @@ public interface DestinationInterface {
     Call<DestinationList> get();
 
     @GET("/destination")
-    Call<DestinationList> getForConnectedUser(@QueryMap Map<String, String> filters);
+    Call<DestinationList> getForConnectedUser(@QueryMap Map<String, Object> filters);
 
     @GET("destination/{id}")
     Call<Destination> getItemById(@Path("id") String itemId);

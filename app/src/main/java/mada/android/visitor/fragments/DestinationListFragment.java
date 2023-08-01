@@ -42,6 +42,7 @@ import mada.android.services.DestinationService;
 import mada.android.tools.Base64Helper;
 import mada.android.tools.ws.CustomCallback;
 import mada.android.tools.ws.FilterItem;
+import mada.android.tools.ws.Pagination;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,11 +57,18 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     private DestinationService service;
     private FilterItem searchFilter;
     private FilterItem favoriteFilter;
+    private Pagination pagination;
+
+    private Button prevButton;
+    private Button nextButton;
 
     public DestinationListFragment() {
 
         if(service == null){
             service = new DestinationService();
+        }
+        if(pagination == null){
+            pagination = new Pagination();
         }
     }
     public static DestinationListFragment newInstance(){
@@ -86,6 +94,10 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         //Add search btn listener
         TextView searchTxtView = view.findViewById(R.id.destinationSearchTxt);
         Button searchBtn = view.findViewById(R.id.destinationSearchBtn);
+
+        prevButton = view.findViewById(R.id.destinationListPrevBtn);
+        nextButton = view.findViewById(R.id.destinationListNextBtn);
+
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +126,22 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
                 recyclerView = view.findViewById(R.id.destinationRecyclerView);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+                prevButton.setVisibility(View.VISIBLE);
+                prevButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        pagination.setPage(pagination.getPage()-1);
+                        reloadList(view);
+                    }
+                });
+                nextButton.setVisibility(View.VISIBLE);
+                nextButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        pagination.setPage(pagination.getPage()+1);
+                        reloadList(view);
+                    }
+                });
 
                 destinationAdapter = new DestinationAdapter(getChildFragmentManager(), destinationList, fragment);
                 recyclerView.setAdapter(destinationAdapter);
@@ -127,6 +155,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
             public void callback(DestinationList list, View v) throws Exception {
                 destinationList.clear();
                 destinationList.addAll(list.getData());
+
                 destinationAdapter.notifyDataSetChanged();
             }
         });
@@ -136,7 +165,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
             Call<DestinationList> call = service.getForConnectedUser(new ArrayList<FilterItem>(){{
                 add(searchFilter);
                 add(favoriteFilter);
-            }});
+            }}, pagination);
 
             call.enqueue(new Callback<DestinationList>() {
                 @Override
@@ -146,6 +175,8 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
                             Toast.makeText(view.getContext(), "Destination server error", Toast.LENGTH_SHORT).show();
                         else{
                             DestinationList list = response.body();
+                            prevButton.setEnabled(pagination.hasPrev(list.getMeta().getTotalElmtCount()));
+                            nextButton.setEnabled(pagination.hasNext(list.getMeta().getTotalElmtCount()));
                             displayCallback.callback(list, view);
                         }
                     }catch (Exception e){
@@ -164,16 +195,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     }
 
 
-    // Dummy method to provide a list of destinations for demonstration purposes
-    private List<Destination> getDestinations() {
-        List<Destination> destinations = new ArrayList<>();
-        destinations.add(new Destination("1", "Destination 1", "Description for Destination 1"));
-        destinations.add(new Destination("2", "Destination 2", "Description for Destination 2"));
-        destinations.add(new Destination("3", "Destination 3", "Description for Destination 3"));
 
-
-        return destinations;
-    }
 
 
     @Override
@@ -238,10 +260,10 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         favoritesRadioGroup.addView(radioButton1);
 
 // Now, you can add the RadioGroup to your desired parent view or layout
-        FrameLayout parentLayout = view.findViewById(R.id.destinationListMainLayout); // Replace with the ID of your parent layout
+        RelativeLayout parentLayout = view.findViewById(R.id.destinationListMainLayout); // Replace with the ID of your parent layout
         parentLayout.addView(favoritesRadioGroup,1);
         RecyclerView rv = view.findViewById(R.id.destinationRecyclerView);
-        FrameLayout.LayoutParams recyclerParams = (FrameLayout.LayoutParams) rv.getLayoutParams();
+        RelativeLayout.LayoutParams recyclerParams = (RelativeLayout.LayoutParams) rv.getLayoutParams();
         recyclerParams.topMargin = dpToPx(context, 100);
         rv.setLayoutParams(recyclerParams);
 
