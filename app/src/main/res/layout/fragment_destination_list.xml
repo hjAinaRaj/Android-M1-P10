@@ -6,7 +6,7 @@
     android:id="@+id/destinationListMainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".visitor.fragments.DestinationListFragment">
+    tools:context=".visitor.fragments.destination.DestinationListFragment">
 
 
     <LinearLayout
@@ -85,7 +85,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/destinationListPrevBtn"
+            android:id="@+id/quizQuestionPrevBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_pagin"
@@ -102,7 +102,7 @@
         <!-- Add the second button -->
 
         <Button
-            android:id="@+id/destinationListNextBtn"
+            android:id="@+id/quizQuestionNextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_pagin"

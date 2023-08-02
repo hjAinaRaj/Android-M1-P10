@@ -21,7 +21,7 @@
         tools:ignore="ContentDescription" />
 
     <mada.android.commons.fonts.cairoBoldTextView
-        android:id="@+id/destinationTitleTextView"
+        android:id="@+id/quizzQuestionQuestionTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -37,7 +37,7 @@
         android:id="@+id/destinationDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/destinationTitleTextView"
+        android:layout_below="@+id/quizzQuestionQuestionTxt"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="2dp"

@@ -1,4 +1,4 @@
-package mada.android.visitor.fragments;
+package mada.android.visitor.fragments.destination;
 
 
 import android.graphics.Bitmap;
@@ -8,25 +8,19 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import mada.android.R;
-import mada.android.commons.YoutubeWebClient;
 import mada.android.models.destination.Destination;
 import mada.android.services.DestinationService;
 import mada.android.tools.Base64Helper;
@@ -89,7 +83,7 @@ public class DestinationDetailsFragment extends Fragment {
         this.descriptionTextView = view.findViewById(R.id.destinationDetailsDescription);
         this.destinationImageView = view.findViewById(R.id.destinationItemImage);
 
-        this.youtubePlayerView = view.findViewById(R.id.destinationDetailsVideoView);
+        this.youtubePlayerView = view.findViewById(R.id.quizIntroVideoView);
         DestinationDetailsFragment fragment = this;
 
         // TODO: Use the destinationId to fetch the destination details

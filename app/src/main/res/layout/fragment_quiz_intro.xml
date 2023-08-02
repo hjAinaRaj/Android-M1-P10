@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".visitor.fragments.quiz.QuizQuestionFragment">
+
+
+    <TextView
+        android:id="@+id/quizQuestionNumberTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Quiz"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bg_recat">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/quizIntroVideoCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:cardCornerRadius="18dp">
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/quizIntroVideoView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:autoPlay="false" />
+
+        </androidx.cardview.widget.CardView>
+
+        <mada.android.commons.fonts.cairoBoldTextView
+            android:id="@+id/quizIntroTitleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quizIntroVideoCardView"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="5"
+            android:text="------"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            tools:ignore="SpUsage" />
+
+        <mada.android.commons.fonts.cairoTextView
+            android:id="@+id/quizIntroDescriptionTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quizIntroTitleView"
+            android:layout_centerInParent="true"
+            android:layout_gravity="clip_horizontal"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="22dp"
+            android:gravity="center"
+            android:text="Site touristique"
+            android:textColor="#5f5f5f"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+
+</LinearLayout>

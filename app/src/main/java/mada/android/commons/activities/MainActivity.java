@@ -1,12 +1,10 @@
 package mada.android.commons.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
 import android.os.Bundle;
 
 import mada.android.R;
-import mada.android.visitor.fragments.DestinationListFragment;
 
 public class MainActivity extends BaseActivity {
 

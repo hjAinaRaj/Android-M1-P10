@@ -2,11 +2,9 @@ package mada.android.visitor.fragments.home;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +19,8 @@ import mada.android.adapter.SeparatedDestinationAdapter;
 import mada.android.commons.fragments.BaseFragment;
 import mada.android.models.destination.Destination;
 import mada.android.models.destination.DestinationList;
-import mada.android.models.users.UserToken;
 import mada.android.services.DestinationService;
-import mada.android.visitor.fragments.DestinationListFragment;
+import mada.android.visitor.fragments.destination.DestinationListFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

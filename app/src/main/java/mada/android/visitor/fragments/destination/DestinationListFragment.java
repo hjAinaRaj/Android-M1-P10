@@ -1,6 +1,5 @@
-package mada.android.visitor.fragments;
+package mada.android.visitor.fragments.destination;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,14 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +26,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +90,8 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         TextView searchTxtView = view.findViewById(R.id.destinationSearchTxt);
         Button searchBtn = view.findViewById(R.id.destinationSearchBtn);
 
-        prevButton = view.findViewById(R.id.destinationListPrevBtn);
-        nextButton = view.findViewById(R.id.destinationListNextBtn);
+        prevButton = view.findViewById(R.id.quizQuestionPrevBtn);
+        nextButton = view.findViewById(R.id.quizQuestionNextBtn);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,7 +226,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
                 dpToPx(context, 120), // Replace with the appropriate dimension in pixels
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-// Create the first RadioButton
+
         RadioButton radioButton0 = new RadioButton(context);
         allRadioBtnId = View.generateViewId();
         radioButton0.setId(allRadioBtnId);
@@ -244,7 +239,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         radioButton0.setText("All");
         radioButton0.setTextColor(ContextCompat.getColorStateList(context, R.color.radio_flat_text_selector)); // Replace with the appropriate color selector
 
-// Create the second RadioButton
+
         RadioButton radioButton1 = new RadioButton(context);
         favoritesRadioBtnId = View.generateViewId();
         radioButton1.setId(favoritesRadioBtnId);
@@ -255,12 +250,12 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         radioButton1.setText("Favorites");
         radioButton1.setTextColor(ContextCompat.getColorStateList(context, R.color.radio_flat_text_selector)); // Replace with the appropriate color selector
 
-// Add the RadioButtons to the RadioGroup
+
         favoritesRadioGroup.addView(radioButton0);
         favoritesRadioGroup.addView(radioButton1);
 
-// Now, you can add the RadioGroup to your desired parent view or layout
-        RelativeLayout parentLayout = view.findViewById(R.id.destinationListMainLayout); // Replace with the ID of your parent layout
+
+        RelativeLayout parentLayout = view.findViewById(R.id.destinationListMainLayout);
         parentLayout.addView(favoritesRadioGroup,1);
         RecyclerView rv = view.findViewById(R.id.destinationRecyclerView);
         RelativeLayout.LayoutParams recyclerParams = (RelativeLayout.LayoutParams) rv.getLayoutParams();
@@ -341,7 +336,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         DestinationViewHolder(View itemView) {
             super(itemView);
 
-            titleTextView = itemView.findViewById(R.id.destinationTitleTextView);
+            titleTextView = itemView.findViewById(R.id.quizzQuestionQuestionTxt);
             descriptionTextView = itemView.findViewById(R.id.destinationDescriptionTextView);
             imageView = itemView.findViewById(R.id.destinationItemImage);
 

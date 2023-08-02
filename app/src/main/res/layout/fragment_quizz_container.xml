@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".visitor.activities.home.HomeVisitorActivity">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/quiz_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="top"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp"
+        android:gravity="top"
+        android:orientation="horizontal">
+
+        <!-- Add the first button -->
+        <Space
+            android:id="@+id/quiz_prev_space"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/quizQuestionPrevBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_pagin"
+            android:text="Prev"
+            android:textAllCaps="false" />
+
+        <!-- Add a space to distribute the buttons -->
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <!-- Add the second button -->
+
+        <Button
+            android:id="@+id/quizQuestionNextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_pagin"
+            android:text="Next"
+            android:textAllCaps="false" />
+
+        <Space
+            android:id="@+id/quiz_next_space"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</LinearLayout>

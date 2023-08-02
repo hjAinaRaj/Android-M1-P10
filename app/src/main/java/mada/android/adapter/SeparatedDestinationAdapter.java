@@ -1,6 +1,5 @@
 package mada.android.adapter;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import mada.android.R;
 import mada.android.models.destination.Destination;
-import mada.android.visitor.fragments.DestinationDetailsFragment;
+import mada.android.visitor.fragments.destination.DestinationDetailsFragment;
 import mada.android.visitor.fragments.home.HomeVisitorDestinationListFragment;
 
 public class SeparatedDestinationAdapter extends RecyclerView.Adapter<SeparatedDestinationAdapter.Holder> {
