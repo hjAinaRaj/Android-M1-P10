@@ -12,14 +12,18 @@ import mada.android.R;
 import mada.android.commons.activities.BaseActivity;
 import mada.android.services.external.FirebaseTokenService;
 import mada.android.services.external.MyFirebaseMessagingService;
+import mada.android.tools.ConfigUtilities;
+import mada.android.tools.token.SharedPreferencesUtilities;
 import mada.android.visitor.fragments.DestinationListFragment;
 import mada.android.visitor.fragments.home.HomeVisitorFragment;
 import mada.android.visitor.fragments.home.SettingVisitorFragment;
+import mada.android.visitor.fragments.settings.SettingUnknownVisitorFragment;
 
 public class HomeVisitorActivity extends BaseActivity {
     private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //this.initGlobalPreferences();
         SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_visitor);
@@ -57,4 +61,18 @@ public class HomeVisitorActivity extends BaseActivity {
             return true;
         });
     }
+
+    /*private void initGlobalPreferences() {
+        String languagePref = SharedPreferencesUtilities.loadData(
+                this,
+                SettingUnknownVisitorFragment.LANGUAGE_PREF_KEY,
+                "fr");
+        boolean nightModeChecked = SharedPreferencesUtilities.loadDataBoolean(
+                this,
+                SettingUnknownVisitorFragment.NIGHT_MODE_KEY,
+                false);
+
+        ConfigUtilities.updateTheme(this, nightModeChecked);
+        //ConfigUtilities.switchLanguage(this, languagePref);
+    }*/
 }

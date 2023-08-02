@@ -40,7 +40,7 @@ public class SettingVisitorFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         String userToken = SharedPreferencesUtilities.loadData(
-                getActivity(),
+                getContext(),
                 TokenUtilities.USER_TOKEN_KEY,
                 ""
         );

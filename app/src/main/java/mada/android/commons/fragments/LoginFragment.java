@@ -82,12 +82,12 @@ public class LoginFragment extends BaseFragment {
                         public void onResponse(Call<UserToken> call, Response<UserToken> response) {
                             UserToken userToken = response.body();
                             SharedPreferencesUtilities.saveData(
-                                    getActivity(),
+                                    getContext(),
                                     TokenUtilities.USER_TOKEN_KEY,
                                     userToken.getToken()
                             );
                             SharedPreferencesUtilities.saveData(
-                                    getActivity(),
+                                    getContext(),
                                     TokenUtilities.USER_NAME,
                                     userToken.getUser().getFirstName()
                             );
@@ -96,7 +96,7 @@ public class LoginFragment extends BaseFragment {
                                 startingActivity = new HomeAdminActivity();
                             }
                             String userTokenLoaded = SharedPreferencesUtilities.loadData(
-                                    getActivity(),
+                                    getContext(),
                                     TokenUtilities.USER_TOKEN_KEY,
                                     ""
                             );
