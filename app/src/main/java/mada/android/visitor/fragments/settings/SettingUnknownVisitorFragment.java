@@ -125,7 +125,7 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 boolean isChecked = true;
-                updateTheme(view, isChecked);
+                updateTheme(isChecked);
                 SharedPreferencesUtilities.saveDataBoolean(
                         getContext(),
                         NIGHT_MODE_KEY,
@@ -138,7 +138,7 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 boolean isChecked = false;
-                updateTheme(view, isChecked);
+                updateTheme(isChecked);
                 SharedPreferencesUtilities.saveDataBoolean(
                         getContext(),
                         NIGHT_MODE_KEY,
@@ -171,12 +171,15 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     }
 
     private void switchLanguage(String languageCode) {
-        Activity activity = getActivity();
         SharedPreferencesUtilities.saveData(getContext(), LANGUAGE_PREF_KEY, languageCode);
-        ConfigUtilities.switchLanguage(activity, languageCode);
+        ConfigUtilities.switchLanguage(getContext(), languageCode);
     }
 
     public void updateTheme(View view, boolean isChecked){
-        ConfigUtilities.updateTheme(view, isChecked);
+        ConfigUtilities.updateTheme(getContext(), isChecked);
+    }
+
+    public void updateTheme(boolean isChecked){
+        ConfigUtilities.updateTheme(getContext(), isChecked);
     }
 }

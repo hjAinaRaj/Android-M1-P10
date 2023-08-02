@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import mada.android.R;
+import mada.android.commons.MyApplication;
 import mada.android.commons.activities.BaseActivity;
 import mada.android.services.external.FirebaseTokenService;
 import mada.android.services.external.MyFirebaseMessagingService;
@@ -21,6 +22,7 @@ import mada.android.visitor.fragments.settings.SettingUnknownVisitorFragment;
 
 public class HomeVisitorActivity extends BaseActivity {
     private BottomNavigationView bottomNavigationView;
+    private boolean isRecreatingCalled = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //this.initGlobalPreferences();
@@ -61,18 +63,4 @@ public class HomeVisitorActivity extends BaseActivity {
             return true;
         });
     }
-
-    /*private void initGlobalPreferences() {
-        String languagePref = SharedPreferencesUtilities.loadData(
-                this,
-                SettingUnknownVisitorFragment.LANGUAGE_PREF_KEY,
-                "fr");
-        boolean nightModeChecked = SharedPreferencesUtilities.loadDataBoolean(
-                this,
-                SettingUnknownVisitorFragment.NIGHT_MODE_KEY,
-                false);
-
-        ConfigUtilities.updateTheme(this, nightModeChecked);
-        //ConfigUtilities.switchLanguage(this, languagePref);
-    }*/
 }
