@@ -34,16 +34,41 @@
             android:layout_height="wrap_content"
             android:text="@string/activate_night_mode" />
 
-        <Spinner
-            android:id="@+id/spinnerLanguage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/buttonToEn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="to En" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonToLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clair" />
+
+            <Button
+                android:id="@+id/buttonToDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonToFr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fr" />
+
+            <Button
+                android:id="@+id/buttonToEn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/en" />
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

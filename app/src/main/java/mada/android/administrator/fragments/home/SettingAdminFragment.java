@@ -43,7 +43,7 @@ public class SettingAdminFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 SharedPreferencesUtilities.saveData(
-                        getActivity(),
+                        getContext(),
                         TokenUtilities.USER_TOKEN_KEY,
                         ""
                 );

@@ -33,4 +33,9 @@
     <string name="localisation">Localisation</string>
     <string name="active_notif">Activer la notification</string>
     <string name="activate_night_mode">Activer mode nuit</string>
+    <string name="valid">Valider</string>
+    <string name="fr">Fr</string>
+    <string name="en">En</string>
+    <string name="clair">Clair</string>
+    <string name="dark">Sombre</string>
 </resources>

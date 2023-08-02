@@ -1,17 +1,13 @@
 package mada.android.visitor.fragments.settings;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,22 +16,29 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import java.util.Locale;
 
 import mada.android.R;
 import mada.android.commons.activities.AuthActivity;
 import mada.android.commons.fragments.BaseFragment;
 import mada.android.services.external.MyFirebaseMessagingService;
+import mada.android.tools.ConfigUtilities;
 import mada.android.tools.token.SharedPreferencesUtilities;
 
 public class SettingUnknownVisitorFragment extends BaseFragment {
     public final static String NOTIF_KEY = "notif_key";
     public final static String NIGHT_MODE_KEY = "night_mode_key";
+    public final static String LANGUAGE_PREF_KEY = "language_key";
     private Button buttonToLogin;
     private Switch switchNotification;
     private Switch switchNightMode;
     private Spinner spinnerLanguage;
     private Button buttonToEn;
+    private Button buttonToFr;
+    private Button buttonToLight;
+    private Button buttonToDark;
     private MyFirebaseMessagingService myFirebaseMessagingService;
     private boolean isUpdatingTheme = false;
 
@@ -65,15 +68,7 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
         this.buttonToLogin = (Button) view.findViewById(R.id.buttonToLogin);
         this.initNotificationSwitch(view);
         this.initNightMode(view);
-        this.spinnerLanguage = (Spinner) view.findViewById(R.id.spinnerLanguage);
-        this.buttonToEn = (Button) view.findViewById(R.id.buttonToEn);
-
-        this.buttonToEn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchLanguage("en");
-            }
-        });
+        this.initLanguageButton(view);
         this.buttonToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,39 +76,29 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
             }
         });
 
-        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this.getContext(),
-                R.array.language_arrays,
-                android.R.layout.simple_spinner_item
-        );
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
-        // Apply the adapter to the spinner
-        /*spinnerLanguage.setAdapter(adapter);
-        spinnerLanguage.setSelection(0);*/
+    }
 
-        /*spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    private void initLanguageButton(View view) {
+        this.buttonToEn = (Button) view.findViewById(R.id.buttonToEn);
+        this.buttonToFr = (Button) view.findViewById(R.id.buttonToFr);
+        this.buttonToEn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Récupérez la langue sélectionnée
-                String selectedLanguage = parent.getItemAtPosition(position).toString();
-                selectedLanguage = "en";
-
-                // Changez la langue de l'application en fonction de la sélection
-                //switchLanguage(selectedLanguage);
+            public void onClick(View v) {
+                switchLanguage("en");
             }
-
+        });
+        this.buttonToFr.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                switchLanguage("fr");
             }
-        });*/
+        });
     }
 
     public void initNotificationSwitch(View view){
         this.switchNotification = (Switch) view.findViewById(R.id.switchNotif);
         boolean defaultValue = SharedPreferencesUtilities.
-                loadDataBoolean(getActivity(), NOTIF_KEY, false);
+                loadDataBoolean(getContext(), NOTIF_KEY, false);
         this.switchNotification.setChecked(defaultValue);
         this.switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -124,7 +109,7 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
                     }else{
                         myFirebaseMessagingService.unsubscribeSavedToken();
                     }
-                    SharedPreferencesUtilities.saveDataBoolean(getActivity(), NOTIF_KEY, isChecked);
+                    SharedPreferencesUtilities.saveDataBoolean(getContext(), NOTIF_KEY, isChecked);
                 }catch (Exception e){
                     Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -133,7 +118,35 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     }
 
     public void initNightMode(View view){
-        this.switchNightMode = (Switch) view.findViewById(R.id.switchNightMode);
+        this.buttonToDark = (Button) view.findViewById(R.id.buttonToDark);
+        this.buttonToLight = (Button) view.findViewById(R.id.buttonToLight);
+
+        this.buttonToDark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = true;
+                updateTheme(isChecked);
+                SharedPreferencesUtilities.saveDataBoolean(
+                        getContext(),
+                        NIGHT_MODE_KEY,
+                        isChecked
+                );
+            }
+        });
+
+        this.buttonToLight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = false;
+                updateTheme(isChecked);
+                SharedPreferencesUtilities.saveDataBoolean(
+                        getContext(),
+                        NIGHT_MODE_KEY,
+                        isChecked
+                );
+            }
+        });
+        /*this.switchNightMode = (Switch) view.findViewById(R.id.switchNightMode);
         boolean nightModeChecked = SharedPreferencesUtilities.loadDataBoolean(
                 getActivity(), NIGHT_MODE_KEY, false
         );
@@ -154,33 +167,19 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
                 );
                 isUpdatingTheme = false;
             }
-        });
+        });*/
     }
 
     private void switchLanguage(String languageCode) {
-        // Changez la configuration de la langue en fonction du code de langue sélectionné
-        Locale locale = new Locale(languageCode);
-        Resources resources = getResources();
-        Configuration configuration = resources.getConfiguration();
-        configuration.setLocale(locale);
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-
-        this.getActivity().recreate();
+        SharedPreferencesUtilities.saveData(getContext(), LANGUAGE_PREF_KEY, languageCode);
+        ConfigUtilities.switchLanguage(getContext(), languageCode);
     }
 
     public void updateTheme(View view, boolean isChecked){
-        try {
-            if(isChecked){
-                // Activate night mode
-                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                getActivity().setTheme(R.style.Theme_Mada_dark);
-            }else{
-                getActivity().setTheme(R.style.Theme_Mada);
-                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-            //getActivity().recreate();
-        }catch (Exception e){
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        ConfigUtilities.updateTheme(getContext(), isChecked);
+    }
+
+    public void updateTheme(boolean isChecked){
+        ConfigUtilities.updateTheme(getContext(), isChecked);
     }
 }
