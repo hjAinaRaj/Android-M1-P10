@@ -1,12 +1,16 @@
 package mada.android.models.quiz;
 
+import android.content.res.Resources;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
 public class QuizViewModel extends ViewModel {
     private Quiz currentQuiz;
-    private boolean displayAnswers;
+    private MutableLiveData<Boolean> displayAnswers = new MutableLiveData<>();
 
     public QuizViewModel(){
         currentQuiz = new Quiz();
@@ -20,13 +24,16 @@ public class QuizViewModel extends ViewModel {
             }}, 0));
         }});
     }
-
-    public boolean displayAnswers() {
+    public int submitAnswers(Resources resources) throws Exception {
+        setDisplayAnswers(true);
+        return currentQuiz.submitResults(resources);
+    }
+    public LiveData<Boolean> getDisplayAnswersLiveData(){
         return displayAnswers;
     }
 
     public void setDisplayAnswers(boolean displayAnswers) {
-        this.displayAnswers = displayAnswers;
+        this.displayAnswers.setValue(displayAnswers);
     }
 
     public Quiz getCurrentQuiz() {

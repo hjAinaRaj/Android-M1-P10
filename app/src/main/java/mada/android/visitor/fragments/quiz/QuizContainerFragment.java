@@ -73,6 +73,7 @@ public class QuizContainerFragment extends Fragment {
         List<Fragment> fragments = new ArrayList<Fragment>(){{
             add(QuizIntroFragment.newInstance());
             add(QuizQuestionFragment.newInstance(0));
+            add(QuizResultsFragment.newInstance());
         }};
 
         prevSpace  = v.findViewById(R.id.quiz_prev_space);
@@ -110,6 +111,7 @@ public class QuizContainerFragment extends Fragment {
         });
         viewPager.setUserInputEnabled(false);
         updateButtonVisibility(0);
+        viewModel.setDisplayAnswers(false);
         return v;
     }
     private void updateButtonVisibility(int currentPage) {

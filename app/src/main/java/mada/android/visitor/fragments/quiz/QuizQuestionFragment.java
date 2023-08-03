@@ -3,6 +3,7 @@ package mada.android.visitor.fragments.quiz;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -88,6 +89,34 @@ public class QuizQuestionFragment extends Fragment {
                 currentQuestion.setCurrentAnswer(radioButtonIds.indexOf(checkedId));
             }
         });
+
+        //When results are to be displayed
+        viewModel.getDisplayAnswersLiveData().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean itemList) {
+                 if(itemList){
+                     displayAnswers(v);
+                 }else{
+                     hideAnswers(v);
+                 }
+            }
+        });
         return v;
+    }
+    private void displayAnswers(View view){
+        RadioButton redBtn = view.findViewById(radioButtonIds.get(currentQuestion.getCurrentAnswer()));
+        redBtn.setTextColor(getResources().getColor(R.color.wrong_answer));
+        RadioButton green = view.findViewById(radioButtonIds.get(currentQuestion.getRightAnswer()));
+        green.setTextColor(getResources().getColor(R.color.right_answer));
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            radioGroup.getChildAt(i).setEnabled(false);
+        }
+    }
+    private void hideAnswers(View view){
+
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            radioGroup.getChildAt(i).setEnabled(true);
+            ((RadioButton)(radioGroup.getChildAt(i))).setTextColor(getResources().getColor(R.color.black));
+        }
     }
 }

@@ -1,8 +1,12 @@
 package mada.android.models.quiz;
 
+import android.content.res.Resources;
+
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
+
+import mada.android.R;
 
 public class Quiz {
     private String _id;
@@ -12,6 +16,17 @@ public class Quiz {
 
 
     private List<QuizQuestion> questions;
+
+
+    public int submitResults(Resources resources) throws Exception{
+        double questionsCount = questions.size();
+        double correctAnswers = 0;
+        for(QuizQuestion question: questions){
+            if(question.getCurrentAnswer() == null) throw new Exception (resources.getString(R.string.incomplete_answers_msg));
+            if(question.getCurrentAnswer().equals(question.getRightAnswer())) correctAnswers++;
+        }
+        return (int)((correctAnswers/questionsCount)*100.0);
+    }
 
     public String get_id() {
         return _id;

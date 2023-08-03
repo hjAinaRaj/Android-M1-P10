@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="feedback_color">#18ED00FF</color>
+    <color name="right_answer">#2FB100</color>
+    <color name="wrong_answer">#CC0000</color>
 </resources>

@@ -6,8 +6,7 @@ public class QuizQuestion {
     private String question;
     private List<String> options;
     private int rightAnswer;
-
-    private int currentAnswer;
+    private Integer currentAnswer;
 
     public QuizQuestion(){
 
@@ -18,11 +17,11 @@ public class QuizQuestion {
         this.rightAnswer = rightAnswer;
     }
 
-    public int getCurrentAnswer() {
+    public Integer getCurrentAnswer() {
         return currentAnswer;
     }
 
-    public void setCurrentAnswer(int currentAnswer) {
+    public void setCurrentAnswer(Integer currentAnswer) {
         this.currentAnswer = currentAnswer;
     }
 

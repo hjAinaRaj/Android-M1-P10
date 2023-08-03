@@ -16,7 +16,6 @@ import mada.android.services.external.FirebaseTokenService;
 import mada.android.services.external.MyFirebaseMessagingService;
 import mada.android.tools.ConfigUtilities;
 import mada.android.tools.token.SharedPreferencesUtilities;
-import mada.android.visitor.fragments.DestinationListFragment;
 import mada.android.visitor.fragments.home.SettingVisitorFragment;
 import mada.android.visitor.fragments.settings.SettingUnknownVisitorFragment;
 
