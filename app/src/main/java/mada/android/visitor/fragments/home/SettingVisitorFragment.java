@@ -39,15 +39,7 @@ public class SettingVisitorFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String userToken = SharedPreferencesUtilities.loadData(
-                getContext(),
-                TokenUtilities.USER_TOKEN_KEY,
-                ""
-        );
         Fragment fragment = new SettingUnknownVisitorFragment();
-        if (!userToken.isEmpty()){
-            fragment = new SettingConnectedVisitorFragment();
-        }
         replaceFragment(R.id.fragmentContainerViewSettingVisitor, fragment);
     }
 }

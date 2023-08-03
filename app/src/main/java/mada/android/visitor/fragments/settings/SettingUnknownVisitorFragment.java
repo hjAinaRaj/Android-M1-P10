@@ -26,12 +26,15 @@ import mada.android.commons.fragments.BaseFragment;
 import mada.android.services.external.MyFirebaseMessagingService;
 import mada.android.tools.ConfigUtilities;
 import mada.android.tools.token.SharedPreferencesUtilities;
+import mada.android.tools.token.TokenUtilities;
+import mada.android.visitor.activities.home.HomeVisitorActivity;
 
 public class SettingUnknownVisitorFragment extends BaseFragment {
     public final static String NOTIF_KEY = "notif_key";
     public final static String NIGHT_MODE_KEY = "night_mode_key";
     public final static String LANGUAGE_PREF_KEY = "language_key";
     private Button buttonToLogin;
+    private Button buttonToLogout;
     private Switch switchNotification;
     private Switch switchNightMode;
     private Spinner spinnerLanguage;
@@ -65,17 +68,42 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     }
 
     public void initWidget(View view){
-        this.buttonToLogin = (Button) view.findViewById(R.id.buttonToLogin);
+        this.initAuthButton(view);
         this.initNotificationSwitch(view);
         this.initNightMode(view);
         this.initLanguageButton(view);
+    }
+
+    private void initAuthButton(View view) {
+        this.buttonToLogin = (Button) view.findViewById(R.id.buttonToLogin);
+        this.buttonToLogout = (Button) view.findViewById(R.id.buttonToLogoutVisitor);
+
+        String token = SharedPreferencesUtilities.loadData(
+                getContext(),
+                TokenUtilities.USER_TOKEN_KEY,
+                ""
+        );
+        if(!token.isEmpty()){
+            this.buttonToLogin.setVisibility(View.INVISIBLE);
+            this.buttonToLogout.setVisibility(View.VISIBLE);
+        }
         this.buttonToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startNewActivity(v, new AuthActivity());
             }
         });
-
+        this.buttonToLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtilities.saveData(
+                        getContext(),
+                        TokenUtilities.USER_TOKEN_KEY,
+                        ""
+                );
+                startNewActivity(v, new HomeVisitorActivity());
+            }
+        });
     }
 
     private void initLanguageButton(View view) {
