@@ -77,7 +77,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="14dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <!-- Add the first button -->
         <Space
