@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/accueilMenuAdmin"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="@string/accueil" />
+    <item
         android:id="@+id/destinationMenuAdmin"
         android:icon="@android:drawable/ic_menu_mylocation"
         android:title="@string/destination" />
@@ -9,10 +13,6 @@
         android:id="@+id/hotelMenuAdmin"
         android:icon="@android:drawable/ic_dialog_map"
         android:title="@string/hotel" />
-    <item
-        android:id="@+id/accueilMenuAdmin"
-        android:icon="@android:drawable/ic_dialog_dialer"
-        android:title="@string/accueil" />
     <item
         android:id="@+id/actualityMenuAdmin"
         android:icon="@android:drawable/btn_star"
