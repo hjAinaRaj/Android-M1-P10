@@ -2,8 +2,10 @@ package mada.android.visitor.fragments.destination;
 
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import com.google.android.gms.internal.maps.zzaa;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -24,6 +26,7 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 
 import mada.android.BuildConfig;
 import mada.android.R;
@@ -156,6 +159,9 @@ try{
         // Configurer la source de tuiles (les tuiles sont les images de la carte)
         mapView.setTileSource(TileSourceFactory.MAPNIK);
 
+        // Permettre le zoom par drag
+        mapView.setMultiTouchControls(true);
+
         // Configurer le zoom maximal et minimal de la carte
         mapView.setMinZoomLevel(4.0);
         mapView.setMaxZoomLevel(19.0);
@@ -166,6 +172,13 @@ try{
 
         // Définir le niveau de zoom initial
         mapView.getController().setZoom(12.0);
+
+        // Ajouter un marqueur à la position spécifiée
+        GeoPoint startPoint = new GeoPoint(48.8566, 2.3522);
+        Marker startMarker = new Marker(mapView);
+        startMarker.setPosition(startPoint);
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        mapView.getOverlays().add(startMarker);
     }
 
     private void setMap(String localisation){
@@ -174,6 +187,11 @@ try{
         float longitute = new Float(splitedLocalisation[1]).floatValue();
         GeoPoint center = new GeoPoint(latitude, longitute);
         mapView.getController().setCenter(center);
+
+        Marker startMarker = new Marker(mapView);
+        startMarker.setPosition(center);
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        mapView.getOverlays().add(startMarker);
     }
 
     @Override
