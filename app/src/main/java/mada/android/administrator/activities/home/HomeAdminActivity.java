@@ -29,15 +29,19 @@ public class HomeAdminActivity extends BaseActivity {
         int fragmentContainerViewId = R.id.fragmentContainerViewAdmin;
         this.bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationViewAdmin);
         this.bottomNavigationView.setOnItemSelectedListener(item -> {
-            if(item.getItemId() == R.id.accueilMenuAdmin){
+            /*if(item.getItemId() == R.id.accueilMenuAdmin){
                 replaceFragment(fragmentContainerViewId, new HomeAdminFragment());
-            }else if(item.getItemId() == R.id.destinationMenuAdmin){
+            }*/
+            if(item.getItemId() == R.id.destinationMenuAdmin){
                 replaceFragment(fragmentContainerViewId, new HomeAdminDestinationListFragment());
-            }else if(item.getItemId() == R.id.hotelMenuAdmin){
+            }
+            /*else if(item.getItemId() == R.id.hotelMenuAdmin){
                 replaceFragment(fragmentContainerViewId, new HomeAdminHotelListFragment());
-            }else if(item.getItemId() == R.id.actualityMenuAdmin){
+            }
+            else if(item.getItemId() == R.id.actualityMenuAdmin){
                 replaceFragment(fragmentContainerViewId, new HomeAdminActualityListFragment());
-            }else if(item.getItemId() == R.id.settingMenuAdmin){
+            }*/
+            else if(item.getItemId() == R.id.settingMenuAdmin){
                 replaceFragment(fragmentContainerViewId, new SettingAdminFragment());
             }
 
