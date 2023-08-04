@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -17,12 +19,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Space;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mada.android.R;
+import mada.android.models.destination.QuizList;
+import mada.android.models.quiz.Quiz;
+import mada.android.models.quiz.QuizQuestion;
 import mada.android.models.quiz.QuizViewModel;
+import mada.android.services.QuizService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +41,7 @@ import mada.android.models.quiz.QuizViewModel;
  */
 public class QuizContainerFragment extends Fragment {
     private QuizViewModel viewModel;
-
+    private QuizService service;
 
 
     private static final String ARG_QUIZ_ID = "quizId";
@@ -70,11 +80,41 @@ public class QuizContainerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_quizz_container, container, false);
+        try{
+            Call<Quiz> call = service.get(quizId);
+            call.enqueue(new Callback<Quiz>() {
+                @Override
+                public void onResponse(Call<Quiz> call, Response<Quiz> response) {
+                    if(response.code() != 200)
+                        Toast.makeText(v.getContext(), "Quiz server error", Toast.LENGTH_SHORT).show();
+                    else{
+                        viewModel.setCurrentQuiz(response.body());
+                      loadQuiz(v);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Quiz> call, Throwable t) {
+                    Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }catch(Exception e){
+            Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return v;
+    }
+
+    private void loadQuiz(View v){
         List<Fragment> fragments = new ArrayList<Fragment>(){{
             add(QuizIntroFragment.newInstance());
-            add(QuizQuestionFragment.newInstance(0));
-            add(QuizResultsFragment.newInstance());
+
         }};
+        int i = 0;
+        for(QuizQuestion q : viewModel.getCurrentQuiz().getQuestions()){
+            fragments.add(QuizQuestionFragment.newInstance(i));
+            i++;
+        }
+        fragments.add(QuizResultsFragment.newInstance());
 
         prevSpace  = v.findViewById(R.id.quiz_prev_space);
         nextSpace  = v.findViewById(R.id.quiz_next_space);
@@ -112,7 +152,6 @@ public class QuizContainerFragment extends Fragment {
         viewPager.setUserInputEnabled(false);
         updateButtonVisibility(0);
         viewModel.setDisplayAnswers(false);
-        return v;
     }
     private void updateButtonVisibility(int currentPage) {
 

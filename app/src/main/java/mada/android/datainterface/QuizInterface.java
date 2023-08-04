@@ -6,6 +6,7 @@ import mada.android.models.defaultResponses.MessageResponse;
 import mada.android.models.destination.Destination;
 import mada.android.models.destination.DestinationList;
 import mada.android.models.destination.QuizList;
+import mada.android.models.quiz.Quiz;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -19,6 +20,6 @@ public interface QuizInterface {
 
 
     @GET("destination/{id}")
-    Call<QuizList> getItemById(@Path("id") String itemId);
+    Call<Quiz> getItemById(@Path("id") String itemId);
 
 }

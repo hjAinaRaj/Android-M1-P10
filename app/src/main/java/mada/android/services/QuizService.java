@@ -12,6 +12,7 @@ import mada.android.models.destination.Destination;
 import mada.android.models.destination.DestinationList;
 import mada.android.models.destination.FavoriteDestination;
 import mada.android.models.destination.QuizList;
+import mada.android.models.quiz.Quiz;
 import mada.android.tools.ws.FilterItem;
 import mada.android.tools.ws.Pagination;
 import mada.android.tools.ws.RetrofitClientInstance;
@@ -34,8 +35,8 @@ public class QuizService {
     }
 
 
-    public Call<QuizList> get(String id) throws Exception{
-        Call<QuizList> call = quizInterface.getItemById(id);
+    public Call<Quiz> get(String id) throws Exception{
+        Call<Quiz> call = quizInterface.getItemById(id);
         return call;
     }
 

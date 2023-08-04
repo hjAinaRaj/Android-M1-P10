@@ -113,9 +113,10 @@ public class QuizQuestionFragment extends Fragment {
         }
     }
     private void hideAnswers(View view){
-
+        currentQuestion.setCurrentAnswer(null);
         for (int i = 0; i < radioGroup.getChildCount(); i++) {
             radioGroup.getChildAt(i).setEnabled(true);
+
             ((RadioButton)(radioGroup.getChildAt(i))).setTextColor(getResources().getColor(R.color.black));
         }
     }
