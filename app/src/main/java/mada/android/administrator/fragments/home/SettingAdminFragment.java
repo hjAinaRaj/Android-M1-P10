@@ -38,7 +38,7 @@ public class SettingAdminFragment extends BaseFragment {
     }
 
     public void initWidget(View view){
-        this.buttonLogout = (Button) view.findViewById(R.id.buttonLogout);
+        /*this.buttonLogout = (Button) view.findViewById(R.id.buttonLogout);
         this.buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +49,6 @@ public class SettingAdminFragment extends BaseFragment {
                 );
                 startNewActivity(v, new HomeVisitorActivity());
             }
-        });
+        });*/
     }
 }
