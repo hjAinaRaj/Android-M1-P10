@@ -4,17 +4,26 @@ import android.content.res.Resources;
 
 import androidx.lifecycle.ViewModel;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 import mada.android.R;
 
 public class Quiz {
+    @SerializedName("_id")
     private String _id;
+
+    @SerializedName("video")
     private String video;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("description")
     private String description;
 
-
+    @SerializedName("questions")
     private List<QuizQuestion> questions;
 
 

@@ -1,11 +1,21 @@
 package mada.android.models.quiz;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class QuizQuestion {
+
+    @SerializedName("questions")
     private String question;
+
+    @SerializedName("options")
     private List<String> options;
+
+    @SerializedName("rightAnswer")
     private int rightAnswer;
+
+
     private Integer currentAnswer;
 
     public QuizQuestion(){
