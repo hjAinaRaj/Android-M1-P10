@@ -13,13 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mada.android.R;
+import mada.android.models.destination.DestinationList;
+import mada.android.models.destination.QuizList;
 import mada.android.models.quiz.Quiz;
+import mada.android.services.QuizService;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,10 +35,10 @@ import mada.android.visitor.activities.home.HomeVisitorActivity;
  */
 public class QuizListFragment extends Fragment implements QuizAdapter.OnItemClickListener{
     private List<Quiz> quizzes;
-
+    private QuizService service;
 
     public QuizListFragment() {
-
+        service = new QuizService();
     }
 
 
@@ -53,17 +60,36 @@ public class QuizListFragment extends Fragment implements QuizAdapter.OnItemClic
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_quiz_list, container, false);
-        RecyclerView recyclerView = v.findViewById(R.id.quizListRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        QuizListFragment f = this;
+        try{
+            Call<QuizList> call = service.get();
+            call.enqueue(new Callback<QuizList>() {
+                @Override
+                public void onResponse(Call<QuizList> call, Response<QuizList> response) {
+                    if(response.code() != 200)
+                        Toast.makeText(v.getContext(), "Quiz server error", Toast.LENGTH_SHORT).show();
+                    else{
+
+                        RecyclerView recyclerView = v.findViewById(R.id.quizListRecyclerView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                        quizzes =  response.body().getData();
+                        QuizAdapter adapter = new QuizAdapter(quizzes, f);
+                        recyclerView.setAdapter(adapter);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<QuizList> call, Throwable t) {
+                    Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }catch(Exception e){
+            Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
 
-        Quiz dummyQuiz = new Quiz();
-        dummyQuiz.setTitle("An example of quiz");
-        quizzes = new ArrayList<Quiz>(){{
-            add(dummyQuiz);
-        }};
-        QuizAdapter adapter = new QuizAdapter(quizzes, this);
-        recyclerView.setAdapter(adapter);
+
         return v;
     }
 

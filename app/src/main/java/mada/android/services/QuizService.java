@@ -19,7 +19,7 @@ import retrofit2.Call;
 
 public class QuizService {
     private QuizInterface quizInterface = null;
-    
+
     public QuizService() {
         if(quizInterface == null){
             quizInterface = RetrofitClientInstance.getRetrofitInstance()
