@@ -37,19 +37,23 @@ public class HomeVisitorActivity extends BaseActivity {
         }*/
         int fragmentContainerViewId = R.id.fragmentContainerViewHomeVisitor;
         this.bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        //this.bottomNavigationView.setSelectedItemId(R.id.destinationMenu);
         this.bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.accueilMenu){
+            /*if (item.getItemId() == R.id.accueilMenu){
                 replaceFragment(fragmentContainerViewId, new HomeVisitorFragment());
             }
             else if(item.getItemId() == R.id.destinationMenu){
+                replaceFragment(fragmentContainerViewId, new DestinationListFragment());
+            }*/
+            if(item.getItemId() == R.id.destinationMenu){
                 replaceFragment(fragmentContainerViewId, new DestinationListFragment());
             }
             else if(item.getItemId() == R.id.quizMenu){
                 replaceFragment(fragmentContainerViewId, QuizListFragment.newInstance());
             }
-            else if(item.getItemId() == R.id.hotelMenu){
+            /*else if(item.getItemId() == R.id.hotelMenu){
                 replaceFragment(fragmentContainerViewId, new DestinationListFragment());
-            }
+            }*/
             /*else if(item.getItemId() == R.id.actualityMenu){
                 replaceFragment(fragmentContainerViewId, new DestinationListFragment());
             }*/

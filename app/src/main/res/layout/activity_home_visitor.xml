@@ -23,7 +23,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerViewHomeVisitor"
-                android:name="mada.android.visitor.fragments.home.HomeVisitorFragment"
+                android:name="mada.android.visitor.fragments.destination.DestinationListFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
