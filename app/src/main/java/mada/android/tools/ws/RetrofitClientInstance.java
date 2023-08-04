@@ -1,10 +1,16 @@
 package mada.android.tools.ws;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
 
 import mada.android.BuildConfig;
+import mada.android.commons.MyApplication;
+import mada.android.commons.activities.MainActivity;
+import mada.android.tools.token.SharedPreferencesUtilities;
+import mada.android.tools.token.TokenUtilities;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,13 +40,22 @@ public class RetrofitClientInstance {
         return new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
+                Context context = MyApplication.getInstance().getApplicationContext();
+
                 Request request = chain.request();
 
                 // Modify the request to add the token header
+                String token = SharedPreferencesUtilities.loadData(
+                        context,
+                        TokenUtilities.USER_TOKEN_KEY,
+                        ""
+                );
 
-                request = request.newBuilder()
-                        .header("token",   "93949e3a6e7099311135262b9d17599b")
-                        .build();
+                if(!token.isEmpty()){
+                    request = request.newBuilder()
+                            .header("token",   token)
+                            .build();
+                }
 
                 return chain.proceed(request);
             }

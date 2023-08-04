@@ -15,10 +15,22 @@ import mada.android.tools.token.SharedPreferencesUtilities;
 import mada.android.visitor.fragments.settings.SettingUnknownVisitorFragment;
 
 public class MyApplication extends Application {
+    public static MyApplication getInstance() {
+        return instance;
+    }
+
+    public static void setInstance(MyApplication instance) {
+        MyApplication.instance = instance;
+    }
+
+    private static MyApplication instance;
+
+
     @Override
     public void onCreate() {
         super.onCreate();
         this.initGlobalPreferences();
+        instance = this;
     }
 
     public void initGlobalPreferences() {
