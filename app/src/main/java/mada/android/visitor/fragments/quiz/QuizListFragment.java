@@ -15,12 +15,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import mada.android.R;
-import mada.android.models.destination.DestinationList;
-import mada.android.models.destination.QuizList;
+import mada.android.models.quiz.QuizList;
 import mada.android.models.quiz.Quiz;
 import mada.android.services.QuizService;
 import mada.android.visitor.activities.home.HomeVisitorActivity;

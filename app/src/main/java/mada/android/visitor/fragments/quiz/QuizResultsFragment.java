@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class QuizResultsFragment extends Fragment {
                 displayResultsButton.setVisibility(View.INVISIBLE);
                 resultsReviewHintTxt.setVisibility(View.VISIBLE);
             }catch(Exception e){
+                Log.d("err", Log.getStackTraceString(e));
                 Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 

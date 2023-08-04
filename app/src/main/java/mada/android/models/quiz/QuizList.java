@@ -1,4 +1,4 @@
-package mada.android.models.destination;
+package mada.android.models.quiz;
 
 import com.google.gson.annotations.SerializedName;
 

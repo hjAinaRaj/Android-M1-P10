@@ -6,7 +6,7 @@ import java.util.List;
 
 public class QuizQuestion {
 
-    @SerializedName("questions")
+    @SerializedName("question")
     private String question;
 
     @SerializedName("options")

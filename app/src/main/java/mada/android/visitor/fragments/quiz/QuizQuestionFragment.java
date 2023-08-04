@@ -104,6 +104,7 @@ public class QuizQuestionFragment extends Fragment {
         return v;
     }
     private void displayAnswers(View view){
+        if(currentQuestion.getCurrentAnswer() == null) return;
         RadioButton redBtn = view.findViewById(radioButtonIds.get(currentQuestion.getCurrentAnswer()));
         redBtn.setTextColor(getResources().getColor(R.color.wrong_answer));
         RadioButton green = view.findViewById(radioButtonIds.get(currentQuestion.getRightAnswer()));

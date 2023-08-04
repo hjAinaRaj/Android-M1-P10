@@ -4,12 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -25,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mada.android.R;
-import mada.android.models.destination.QuizList;
 import mada.android.models.quiz.Quiz;
 import mada.android.models.quiz.QuizQuestion;
 import mada.android.models.quiz.QuizViewModel;
@@ -53,7 +47,7 @@ public class QuizContainerFragment extends Fragment {
     private Space nextSpace;
 
     public QuizContainerFragment() {
-
+        service = new QuizService();
     }
 
 
@@ -80,6 +74,14 @@ public class QuizContainerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_quizz_container, container, false);
+        prevSpace  = v.findViewById(R.id.quiz_prev_space);
+        nextSpace  = v.findViewById(R.id.quiz_next_space);
+        nextButton = v.findViewById(R.id.quizQuestionNextBtn);
+        previousButton = v.findViewById(R.id.quizQuestionPrevBtn);
+        previousButton.setVisibility( View.GONE );
+        prevSpace.setVisibility( View.GONE );
+        nextButton.setVisibility (View.GONE );
+        nextSpace.setVisibility( View.GONE );
         try{
             Call<Quiz> call = service.get(quizId);
             call.enqueue(new Callback<Quiz>() {
@@ -116,8 +118,7 @@ public class QuizContainerFragment extends Fragment {
         }
         fragments.add(QuizResultsFragment.newInstance());
 
-        prevSpace  = v.findViewById(R.id.quiz_prev_space);
-        nextSpace  = v.findViewById(R.id.quiz_next_space);
+
         viewPager = v.findViewById(R.id.quiz_view_pager);
         viewPager.setAdapter(new QuizPagerAdapter(this, fragments));
 
@@ -128,7 +129,7 @@ public class QuizContainerFragment extends Fragment {
                 updateButtonVisibility(position);
             }
         });
-        previousButton = v.findViewById(R.id.quizQuestionPrevBtn);
+
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +140,7 @@ public class QuizContainerFragment extends Fragment {
             }
         });
 
-        nextButton = v.findViewById(R.id.quizQuestionNextBtn);
+
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
