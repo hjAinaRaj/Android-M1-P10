@@ -20,6 +20,12 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+
+import mada.android.BuildConfig;
 import mada.android.R;
 import mada.android.models.destination.Destination;
 import mada.android.services.DestinationService;
@@ -41,6 +47,7 @@ public class DestinationDetailsFragment extends Fragment {
     private ImageView destinationImageView;
     private String destinationId;
     private DestinationService service;
+    private MapView mapView;
     private static final String ARG_DESTINATION_ID = "ARG_DESTINATION_ID";
 
     public DestinationDetailsFragment() {
@@ -84,6 +91,9 @@ public class DestinationDetailsFragment extends Fragment {
         this.destinationImageView = view.findViewById(R.id.destinationItemImage);
 
         this.youtubePlayerView = view.findViewById(R.id.quizIntroVideoView);
+
+        this.initMap(view);
+
         DestinationDetailsFragment fragment = this;
 
         // TODO: Use the destinationId to fetch the destination details
@@ -113,8 +123,10 @@ try{
                     });
                     String content = destination.getContent();
                     webView.getSettings().setJavaScriptEnabled(false);
-                    webView.loadDataWithBaseURL(null,"<h2>Discover the Diverse Wildlife</h2><p>Join us on a wildlife expedition like no other. Andasibe-Mantadia National Park is a haven for unique and diverse species. Marvel at the playful ring-tailed lemurs as they swing through the trees, spot colorful chameleons blending into their surroundings, and witness the elusive fossa, Madagascar's largest predator, roaming the forest floor.</p><h2>Immerse in the Lush Rainforest</h2><p>Explore the lush rainforest filled with towering trees and enchanting foliage. Your journey will take you through mist-covered trails, where the haunting calls of the indri lemurs will resonate through the canopy, creating an otherworldly atmosphere.</p><h2>An Unforgettable Experience</h2><p>Prepare to be captivated by the unique flora and fauna that call this park their home. Our experienced guides will share their knowledge, providing you with insights into the delicate balance of this ecosystem.</p>", "text/html", "UTF-8", null);
+                    webView.loadDataWithBaseURL(
+                            null,content, "text/html", "UTF-8", null);
 
+                    setMap(destination.getLocalisation());
                 }
 
             }
@@ -124,13 +136,55 @@ try{
                 Toast.makeText(view.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-}catch (Exception e){
-    Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-}
+        }catch (Exception e){
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
 
         //Handle URL clicks within the WebView
         webView.setWebViewClient(new WebViewClient());
         return view;
+    }
+
+    private void initMap(View view){
+        // Configuration osmdroid (optionnelle mais recommandée)
+        Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
+
+        // Récupérer la vue MapView du layout
+        mapView = view.findViewById(R.id.mapView);
+
+        // Configurer la source de tuiles (les tuiles sont les images de la carte)
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
+
+        // Configurer le zoom maximal et minimal de la carte
+        mapView.setMinZoomLevel(4.0);
+        mapView.setMaxZoomLevel(19.0);
+
+        // Centrer la carte sur une position spécifique (par exemple, Paris)
+        GeoPoint center = new GeoPoint(48.8566, 2.3522);
+        mapView.getController().setCenter(center);
+
+        // Définir le niveau de zoom initial
+        mapView.getController().setZoom(12.0);
+    }
+
+    private void setMap(String localisation){
+        String [] splitedLocalisation = localisation.split(",");
+        float latitude = new Float(splitedLocalisation[0]).floatValue();
+        float longitute = new Float(splitedLocalisation[1]).floatValue();
+        GeoPoint center = new GeoPoint(latitude, longitute);
+        mapView.getController().setCenter(center);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
     }
 }
