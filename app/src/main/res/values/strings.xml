@@ -44,4 +44,5 @@
     <string name="results_review_hint">Vous pouvez consulter les questions précédentes pour voir les réponses correctes</string>
     <string name="select_theme">Choisir le thème</string>
     <string name="select_language">Choisir langue</string>
+    <string name="add_destination">Ajouter destination</string>
 </resources>
