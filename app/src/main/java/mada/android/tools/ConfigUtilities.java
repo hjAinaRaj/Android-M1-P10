@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import java.util.Locale;
 
 import mada.android.commons.activities.MainActivity;
+import mada.android.tools.token.SharedPreferencesUtilities;
+import mada.android.visitor.fragments.settings.SettingUnknownVisitorFragment;
 
 public class ConfigUtilities {
     public static void updateTheme(View view, boolean isChecked){
@@ -38,11 +40,15 @@ public class ConfigUtilities {
             }else{
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
+
         }catch (Exception e){
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
+    public static void updateThemeAndRecreateActivity (Context context, boolean isChecked){
+        updateTheme(context, isChecked);
+        getActivityFromContext(context).recreate();
+    }
     public static void updateTheme(Activity activity, boolean isChecked){
         try {
             /*if(isChecked){
@@ -63,7 +69,7 @@ public class ConfigUtilities {
             Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
+/*
     public static void switchLanguage(Activity activity, String languageCode) {
         // Changez la configuration de la langue en fonction du code de langue sélectionné
         Locale locale = new Locale(languageCode);
@@ -73,19 +79,32 @@ public class ConfigUtilities {
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
 
         activity.recreate();
-    }
+    }*/
 
     public static void switchLanguage(Context context, String languageCode) {
         // Changez la configuration de la langue en fonction du code de langue sélectionné
-        Locale locale = new Locale(languageCode);
-        Resources resources = context.getResources();
-        Configuration configuration = resources.getConfiguration();
-        configuration.setLocale(locale);
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
 
+        setLocale(context, languageCode);
         getActivityFromContext(context).recreate();
     }
+public static void setLocale(Context context, String languageCode){
+    Locale locale = new Locale(languageCode);
+    Locale.setDefault(locale);
+    Resources resources = context.getResources();
 
+    Configuration config = new Configuration();
+    config.locale = locale;
+
+    resources.updateConfiguration(config, resources.getDisplayMetrics());
+}
+
+public static void setLocale(Context context){
+    String selectedLanguage =   SharedPreferencesUtilities.loadData(
+            context,
+            SettingUnknownVisitorFragment.LANGUAGE_PREF_KEY,
+            "fr");
+    setLocale(context, selectedLanguage);
+}
     public static Activity getActivityFromContext(Context context) {
         if (context != null) {
             if (context instanceof Activity) {

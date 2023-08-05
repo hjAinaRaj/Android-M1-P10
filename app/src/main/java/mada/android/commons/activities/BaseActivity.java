@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import mada.android.R;
+import mada.android.tools.ConfigUtilities;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -21,5 +23,14 @@ public class BaseActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .replace(idFragmentContainer, fragment.getClass(), null)
                 .commit();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+
+
+        ConfigUtilities.setLocale(newBase);
+
+        super.attachBaseContext(newBase);
     }
 }

@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,11 +155,22 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
             public void onClick(View v) {
                 boolean isChecked = true;
                 updateTheme(isChecked);
+
                 SharedPreferencesUtilities.saveDataBoolean(
                         getContext(),
                         NIGHT_MODE_KEY,
                         isChecked
                 );
+
+                /*
+                String currentLanguage = SharedPreferencesUtilities.loadData(
+                        getContext(),
+                        SettingUnknownVisitorFragment.LANGUAGE_PREF_KEY,
+                        "fr");
+                Log.d("debug", "-----------------------------CURRENT LANGUAGE "+currentLanguage );
+                switchLanguage(currentLanguage);
+
+                 */
             }
         });
 
@@ -167,11 +179,20 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
             public void onClick(View v) {
                 boolean isChecked = false;
                 updateTheme(isChecked);
+
                 SharedPreferencesUtilities.saveDataBoolean(
                         getContext(),
                         NIGHT_MODE_KEY,
                         isChecked
-                );
+                ); /*
+                String currentLanguage = SharedPreferencesUtilities.loadData(
+                        getContext(),
+                        SettingUnknownVisitorFragment.LANGUAGE_PREF_KEY,
+                        "fr");
+                Log.d("debug", "-----------------------------CURRENT LANGUAGE "+currentLanguage );
+                switchLanguage(currentLanguage);
+                */
+
             }
         });
         /*this.switchNightMode = (Switch) view.findViewById(R.id.switchNightMode);
@@ -203,11 +224,8 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
         ConfigUtilities.switchLanguage(getContext(), languageCode);
     }
 
-    public void updateTheme(View view, boolean isChecked){
-        ConfigUtilities.updateTheme(getContext(), isChecked);
-    }
 
     public void updateTheme(boolean isChecked){
-        ConfigUtilities.updateTheme(getContext(), isChecked);
+        ConfigUtilities.updateThemeAndRecreateActivity(getContext(), isChecked);
     }
 }

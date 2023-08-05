@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -51,14 +52,14 @@ public class MyApplication extends Application {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
         ConfigUtilities.updateTheme(getApplicationContext(), nightModeChecked);
-        setLocale("fr");
+        setLocale(languagePref);
         //ConfigUtilities.switchLanguage(getApplicationContext(), languagePref);
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        setLocale("fr");
+
     }
 
     public void setLocale(String lang) {

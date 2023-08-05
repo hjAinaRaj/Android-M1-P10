@@ -30,12 +30,12 @@ public class SharedPreferencesUtilities {
         editor.putString(key, value);
         editor.apply();
     }
-
-    public static String loadData(Activity activity, String key, String defaultValue){
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        return sharedPref.getString(key, defaultValue);
-    }
-
+    /*
+        public static String loadData(Activity activity, String key, String defaultValue){
+            SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+            return sharedPref.getString(key, defaultValue);
+        }
+     */
     public static String loadData(Context context, String key, String defaultValue){
         SharedPreferences sharedPreferences = SharedPreferencesUtilities.getDefaultSharedPreferences
                 (context);
