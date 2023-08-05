@@ -3,6 +3,11 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
+
+    <color name="green_200">#74E39A</color>
+    <color name="green_500">#3BD16F</color>
+    <color name="green_700">#007A24</color>
+
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
@@ -11,4 +16,9 @@
     <color name="feedback_color">#18ED00FF</color>
     <color name="right_answer">#2FB100</color>
     <color name="wrong_answer">#CC0000</color>
+
+    <color name="dark_white">#edf2fa</color>
+    <color name="light_black">#424242</color>
+    <color name="lighter_black">#666666</color>
+
 </resources>

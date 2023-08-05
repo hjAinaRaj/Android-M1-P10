@@ -33,6 +33,9 @@ import mada.android.R;
 import mada.android.models.destination.Destination;
 import mada.android.services.DestinationService;
 import mada.android.tools.Base64Helper;
+import mada.android.tools.ConfigUtilities;
+import mada.android.tools.token.SharedPreferencesUtilities;
+import mada.android.visitor.fragments.settings.SettingUnknownVisitorFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -124,7 +127,14 @@ try{
                             youTubePlayer.cueVideo(destination.getVideo(), 0);
                         }
                     });
+                    boolean nightModeChecked = SharedPreferencesUtilities.loadDataBoolean(
+                            getContext(),
+                            SettingUnknownVisitorFragment.NIGHT_MODE_KEY,
+                            false);
                     String content = destination.getContent();
+                    String css = "";
+                    if(nightModeChecked) css=ConfigUtilities.getCssDark();
+                    content = "<html><head>" + css + "</head><body>" + content + "</body></html>";
                     webView.getSettings().setJavaScriptEnabled(false);
                     webView.loadDataWithBaseURL(
                             null,content, "text/html", "UTF-8", null);

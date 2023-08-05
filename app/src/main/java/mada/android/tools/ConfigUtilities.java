@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.view.View;
 import android.widget.Toast;
 
@@ -94,6 +95,21 @@ public class ConfigUtilities {
             }
         }
         return null;
+    }
+
+    public static String getCssDark(){
+        return "<style>" +
+                "p, h1, h2, h3 { color: #cccacb; }" +
+                "body { background-color: #000000; }" +
+                "</style>";
+    }
+
+    public static int getDefaultTextColor(Context context) {
+        int[] attrs = new int[]{android.R.attr.textColorPrimary};
+        TypedArray typedArray = context.obtainStyledAttributes(attrs);
+        int textColor = typedArray.getColor(0, 0);
+        typedArray.recycle();
+        return textColor;
     }
 
 }

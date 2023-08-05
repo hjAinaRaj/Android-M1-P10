@@ -5,7 +5,7 @@
     android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal" >
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="Quiz title here"
-            android:textColor="@color/purple_700"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -46,7 +45,7 @@
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="4dp"
-            android:background="#d2d2d2" />
+            android:background="?attr/itemColor" />
 
     </RelativeLayout>
 

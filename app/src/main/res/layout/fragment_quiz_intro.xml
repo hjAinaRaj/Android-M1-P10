@@ -68,7 +68,6 @@
             android:layout_marginBottom="22dp"
             android:gravity="center"
             android:text="Site touristique"
-            android:textColor="#5f5f5f"
             android:textSize="16sp"
             tools:ignore="HardcodedText" />
     </RelativeLayout>

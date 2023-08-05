@@ -2,6 +2,8 @@ package mada.android.visitor.fragments.quiz;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,6 +21,7 @@ import java.util.List;
 import mada.android.R;
 import mada.android.models.quiz.QuizQuestion;
 import mada.android.models.quiz.QuizViewModel;
+import mada.android.tools.ConfigUtilities;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -115,10 +118,12 @@ public class QuizQuestionFragment extends Fragment {
     }
     private void hideAnswers(View view){
         currentQuestion.setCurrentAnswer(null);
+
+
         for (int i = 0; i < radioGroup.getChildCount(); i++) {
             radioGroup.getChildAt(i).setEnabled(true);
 
-            ((RadioButton)(radioGroup.getChildAt(i))).setTextColor(getResources().getColor(R.color.black));
+            ((RadioButton)(radioGroup.getChildAt(i))).setTextColor(ConfigUtilities.getDefaultTextColor(getContext()));
         }
     }
 }

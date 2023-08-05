@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
@@ -35,6 +36,7 @@
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_quiz_question.xml" value="0.16757246376811594" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_quiz_results.xml" value="0.22" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_quizz_container.xml" value="0.16757246376811594" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_setting_visitor.xml" value="0.16893115942028986" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/main_activity.xml" value="0.14375" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/main_fragment.xml" value="0.1" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/menu/admin_menu.xml" value="0.11770833333333333" />
@@ -42,7 +44,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/id_mainScroll_ScrollView"
-    android:layout_height="match_parent"
-    android:background="#edf2fa" >
+    android:layout_height="match_parent">
 
     <!-- main layout -->
     <RelativeLayout
@@ -55,7 +54,6 @@
                         android:gravity="center"
                         android:maxLines="3"
                         android:text="Rova Manjakamiadana"
-                        android:textColor="#5f5f5f"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText" />
@@ -71,7 +69,6 @@
                         android:layout_marginBottom="22dp"
                         android:gravity="center"
                         android:text="Site touristique"
-                        android:textColor="#5f5f5f"
                         android:textSize="18sp"
                         tools:ignore="HardcodedText" />
 
