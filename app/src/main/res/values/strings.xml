@@ -46,4 +46,8 @@
     <string name="select_language">Choisir langue</string>
     <string name="add_destination">Ajouter destination</string>
     <string name="search">Rechercher</string>
+    <string name="all">Tous</string>
+    <string name="favorites">Favoris</string>
+    <string name="prev">Préc</string>
+    <string name="next">Suiv</string>
 </resources>

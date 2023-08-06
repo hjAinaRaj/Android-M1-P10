@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_pagin"
-            android:text="Prev"
+            android:text="@string/prev"
             android:textAllCaps="false"
             android:visibility="invisible" />
 
@@ -124,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_pagin"
-            android:text="Next"
+            android:text="@string/next"
             android:textAllCaps="false"
             android:visibility="invisible" />
 

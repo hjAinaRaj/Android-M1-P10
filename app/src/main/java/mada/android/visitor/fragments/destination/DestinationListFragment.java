@@ -253,7 +253,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         radioButton0.setButtonDrawable(android.R.color.transparent);
         radioButton0.setChecked(true);
         radioButton0.setPadding(dpToPx(context, 16), dpToPx(context, 3), dpToPx(context, 16), dpToPx(context, 3));
-        radioButton0.setText("All");
+        radioButton0.setText(R.string.all);
         radioButton0.setTextColor(ContextCompat.getColorStateList(context, R.color.radio_flat_text_selector)); // Replace with the appropriate color selector
 
 
@@ -264,7 +264,7 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         radioButton1.setBackground(ContextCompat.getDrawable(context, R.drawable.radio_flat_selector)); // Replace with the appropriate drawable
         radioButton1.setButtonDrawable(android.R.color.transparent);
         radioButton1.setPadding(dpToPx(context, 16), dpToPx(context, 3), dpToPx(context, 16), dpToPx(context, 3));
-        radioButton1.setText("Favorites");
+        radioButton1.setText(R.string.favorites);
         radioButton1.setTextColor(ContextCompat.getColorStateList(context, R.color.radio_flat_text_selector)); // Replace with the appropriate color selector
 
 

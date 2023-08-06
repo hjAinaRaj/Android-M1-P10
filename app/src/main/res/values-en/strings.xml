@@ -47,5 +47,9 @@
     <string name="select_language">Select Language</string>
     <string name="add_destination">Add Destination</string>
     <string name="search">Search</string>
+    <string name="all">All</string>
+    <string name="favorites">Favorites</string>
+    <string name="prev">Prev</string>
+    <string name="next">Next</string>
 </resources>
 
