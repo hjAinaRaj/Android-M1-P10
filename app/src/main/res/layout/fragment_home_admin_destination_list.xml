@@ -8,12 +8,12 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView5"
-        android:name="mada.android.visitor.fragments.destination.DestinationListFragment"
+        android:name="mada.android.administrator.fragments.destination.DestinationCreateFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabButtonAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +24,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/white" />
+        app:backgroundTint="@color/white" />-->
 
 </RelativeLayout>
