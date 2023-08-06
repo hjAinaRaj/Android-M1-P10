@@ -1,19 +1,13 @@
 package mada.android.administrator.activities.home;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import mada.android.R;
-import mada.android.administrator.fragments.home.HomeAdminActualityListFragment;
 import mada.android.administrator.fragments.home.HomeAdminDestinationListFragment;
-import mada.android.administrator.fragments.home.HomeAdminFragment;
-import mada.android.administrator.fragments.home.HomeAdminHotelListFragment;
 import mada.android.administrator.fragments.home.SettingAdminFragment;
 import mada.android.commons.activities.BaseActivity;
-import mada.android.visitor.fragments.home.HomeVisitorFragment;
 
 public class HomeAdminActivity extends BaseActivity {
     private BottomNavigationView bottomNavigationView;

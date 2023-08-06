@@ -29,9 +29,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".visitor.activities.DestinationListActivity"
-            android:exported="false" />
-        <activity
             android:name=".commons.activities.AuthActivity"
             android:exported="false" />
         <activity
