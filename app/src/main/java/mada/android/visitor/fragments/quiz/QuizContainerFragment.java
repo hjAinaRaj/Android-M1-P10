@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ import retrofit2.Response;
 public class QuizContainerFragment extends Fragment {
     private QuizViewModel viewModel;
     private QuizService service;
+    private LinearLayout quizContainerProgressBarLayout;
+    private LinearLayout quizContainerPaginLayout;
 
 
     private static final String ARG_QUIZ_ID = "quizId";
@@ -74,6 +77,9 @@ public class QuizContainerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_quizz_container, container, false);
+        quizContainerProgressBarLayout = v.findViewById(R.id.quizContainerProgressBarLayout);
+        quizContainerPaginLayout =  v.findViewById(R.id.quizContainerPaginLayout);
+
         prevSpace  = v.findViewById(R.id.quiz_prev_space);
         nextSpace  = v.findViewById(R.id.quiz_next_space);
         nextButton = v.findViewById(R.id.quizQuestionNextBtn);
@@ -90,6 +96,7 @@ public class QuizContainerFragment extends Fragment {
                     if(response.code() != 200)
                         Toast.makeText(v.getContext(), "Quiz server error", Toast.LENGTH_SHORT).show();
                     else{
+                        quizContainerProgressBarLayout.setVisibility(View.GONE);
                         viewModel.setCurrentQuiz(response.body());
                       loadQuiz(v);
                     }

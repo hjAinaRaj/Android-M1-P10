@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import retrofit2.Response;
 public class QuizListFragment extends Fragment implements QuizAdapter.OnItemClickListener{
     private List<Quiz> quizzes;
     private QuizService service;
+    private LinearLayout quizListProgressBarLayout;
 
     public QuizListFragment() {
         service = new QuizService();
@@ -58,6 +60,7 @@ public class QuizListFragment extends Fragment implements QuizAdapter.OnItemClic
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_quiz_list, container, false);
+        this.quizListProgressBarLayout = v.findViewById(R.id.quizListProgressBarLayout);
         QuizListFragment f = this;
         try{
             Call<QuizList> call = service.get();
@@ -67,7 +70,7 @@ public class QuizListFragment extends Fragment implements QuizAdapter.OnItemClic
                     if(response.code() != 200)
                         Toast.makeText(v.getContext(), "Quiz server error", Toast.LENGTH_SHORT).show();
                     else{
-
+                        f.quizListProgressBarLayout.setVisibility(View.GONE);
                         RecyclerView recyclerView = v.findViewById(R.id.quizListRecyclerView);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
