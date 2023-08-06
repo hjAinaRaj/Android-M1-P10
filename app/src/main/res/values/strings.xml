@@ -49,7 +49,9 @@
     <string name="all">Tous</string>
     <string name="favorites">Favoris</string>
     <string name="prev">Préc</string>
-    <string name="next">Suiv</string>
+    <string name="next">Suiv</string> 
     <string name="on">ON</string>
-    <string name="off">OFF</string>
+    <string name="off">OFF</string> 
+    <string name="site_touristique">Site touristique</string>
+    <string name="start_quiz">Commencer</string> 
 </resources>
