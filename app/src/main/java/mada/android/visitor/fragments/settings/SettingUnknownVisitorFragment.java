@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -43,6 +44,8 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     private Button buttonToFr;
     private Button buttonToLight;
     private Button buttonToDark;
+    private RadioGroup themeRadioGroup;
+    private RadioGroup langRadioGroup;
     private MyFirebaseMessagingService myFirebaseMessagingService;
     private boolean isUpdatingTheme = false;
 
@@ -108,8 +111,15 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     }
 
     private void initLanguageButton(View view) {
-        this.buttonToEn = (Button) view.findViewById(R.id.buttonToEn);
-        this.buttonToFr = (Button) view.findViewById(R.id.buttonToFr);
+        this.buttonToEn = (Button) view.findViewById(R.id.enRadioBtn);
+        this.buttonToFr = (Button) view.findViewById(R.id.frRadioBtn);
+        this.langRadioGroup = view.findViewById(R.id.langRadioGroup);
+        String currentLang = SharedPreferencesUtilities.loadData(
+                getContext(),
+                LANGUAGE_PREF_KEY,
+                "fr"
+        );
+        langRadioGroup.check(currentLang.equals("fr") ? R.id.frRadioBtn : R.id.enRadioBtn);
         this.buttonToEn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,8 +157,16 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     }
 
     public void initNightMode(View view){
-        this.buttonToDark = (Button) view.findViewById(R.id.buttonToDark);
-        this.buttonToLight = (Button) view.findViewById(R.id.buttonToLight);
+        this.buttonToDark = (Button) view.findViewById(R.id.darkRadioBtn);
+        this.buttonToLight = (Button) view.findViewById(R.id.lightRadioBtn);
+        this.themeRadioGroup = view.findViewById(R.id.themeRadioGroup);
+
+        boolean isCurrentlyNight = SharedPreferencesUtilities.loadDataBoolean(
+                getContext(),
+                NIGHT_MODE_KEY,
+                false
+        );
+        themeRadioGroup.check(isCurrentlyNight ? R.id.darkRadioBtn : R.id.lightRadioBtn);
 
         this.buttonToDark.setOnClickListener(new View.OnClickListener() {
             @Override
