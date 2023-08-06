@@ -1,61 +1,64 @@
-[
+[{
+  "_id": {
+    "$oid": "64cd3d1562d16cca34a6bb7a"
+  },
+  "video": "ABg2Bqhp4fY",
+  "title": "10 best places to visit",
+  "description": "Madagascar has got tons of features that'll get you hooked.",
+  "questions": [
     {
-        "video": "ABg2Bqhp4fY",
-        "title": "10 best places to visit",
-        "description": "Madagascar has got tons of features that'll get you hooked.",
-        "questions": [
-            {
-                "question": "Ifaty is a...",
-                "options": [
-                    "Group of montains",
-                    "Beach",
-                    "City"
-                ],
-                "rightAnswer": 2
-            },
-            {
-                "question": "The indri lemur is famous for ...",
-                "options": [
-                    "Its roaring scream",
-                    "Its long neck",
-                    "Its colorful feathers"
-                ],
-                "rightAnswer": 1
-            },
-            {
-                "question": "The tiny island at the North-west of the main island is called",
-                "options": [
-                    "Nosy Be",
-                    "Sainte-Marie",
-                    "Vanuatu"
-                ],
-                "rightAnswer": 1
-            }
-        ]
+      "question": "Ifaty is a...",
+      "options": [
+        "Group of montains",
+        "Beach",
+        "City"
+      ],
+      "rightAnswer": 1
     },
     {
-        "video": "EDUSPLORER",
-        "title": "An underrated country",
-        "description": "Madagascar's touristic potential is growing.",
-        "questions": [
-            {
-                "question": "What is allegedly the main cause of Madagascar's vibrant biodiversity?",
-                "options": [
-                    "A successful governmental project",
-                    "The island has been splited from the rest of its continent",
-                    "None of the above"
-                ],
-                "rightAnswer": 2
-            },
-            {
-                "question": "Which one is Madagascar's capital?",
-                "options": [
-                    "Antananarivom",
-                    "Toamasina",
-                    "Mahajanga"
-                ],
-                "rightAnswer": 1
-            }
-        ]
+      "question": "The indri lemur is famous for ...",
+      "options": [
+        "Its roaring scream",
+        "Its long neck",
+        "Its colorful feathers"
+      ],
+      "rightAnswer": 0
+    },
+    {
+      "question": "The tiny island at the North-west of the main island is called",
+      "options": [
+        "Nosy Be",
+        "Sainte-Marie",
+        "Vanuatu"
+      ],
+      "rightAnswer": 0
     }
-]
+  ]
+},{
+  "_id": {
+    "$oid": "64cd3d1562d16cca34a6bb7b"
+  },
+  "video": "EDUSPLORER",
+  "title": "An underrated country",
+  "description": "Madagascar's touristic potential is growing.",
+  "questions": [
+    {
+      "question": "What is allegedly the main cause of Madagascar's vibrant biodiversity?",
+      "options": [
+        "A successful governmental project",
+        "The island has been splited from the rest of its continent",
+        "None of the above"
+      ],
+      "rightAnswer": 1
+    },
+    {
+      "question": "Which one is Madagascar's capital?",
+      "options": [
+        "Antananarivom",
+        "Toamasina",
+        "Mahajanga"
+      ],
+      "rightAnswer": 0
+    }
+  ]
+}]
