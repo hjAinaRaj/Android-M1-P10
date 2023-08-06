@@ -195,9 +195,9 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
                         else{
                             DestinationList list = response.body();
                             int destinationElmtVisibility = list.getData().size()>0 ?View.VISIBLE: View.GONE;
-                            destinationListProgressBarLayout.setVisibility(destinationElmtVisibility);
+                            destinationListProgressBarLayout.setVisibility(View.GONE);
                             destinationPaginLayout.setVisibility(destinationElmtVisibility);
-                            recyclerView.setVisibility(View.GONE);
+                            recyclerView.setVisibility(destinationElmtVisibility);
 
                             prevButton.setEnabled(pagination.hasPrev(list.getMeta().getTotalElmtCount()));
                             nextButton.setEnabled(pagination.hasNext(list.getMeta().getTotalElmtCount()));
