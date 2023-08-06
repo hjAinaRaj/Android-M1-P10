@@ -89,7 +89,8 @@ public class LoginFragment extends BaseFragment {
                             SharedPreferencesUtilities.saveData(
                                     getContext(),
                                     TokenUtilities.USER_NAME,
-                                    userToken.getUser().getFirstName()
+                                    userToken.getUser().getFirstName() + " "
+                                    + userToken.getUser().getLastName()
                             );
                             Activity startingActivity = new HomeVisitorActivity();
                             if(userToken.getUser().getRoleId() == Constant.ROLE_ADMIN){

@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -49,6 +50,7 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     private RadioGroup themeRadioGroup;
     private RadioGroup langRadioGroup;
     private RadioGroup notifRadioGroup;
+    private TextView textViewSettingUsername;
     private MyFirebaseMessagingService myFirebaseMessagingService;
     private boolean isUpdatingTheme = false;
 
@@ -79,6 +81,20 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
         this.initNotificationSwitch(view);
         this.initNightMode(view);
         this.initLanguageButton(view);
+        this.initTextView(view);
+    }
+
+    private void initTextView(View view) {
+        this.textViewSettingUsername = (TextView) view.findViewById(R.id.textViewSettingUsername);
+        String name = SharedPreferencesUtilities.loadData(
+                getContext(),
+                TokenUtilities.USER_NAME,
+                ""
+        );
+        if(!name.isEmpty()){
+            this.textViewSettingUsername.setText(name);
+            this.textViewSettingUsername.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initAuthButton(View view) {
@@ -108,6 +124,12 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
                         TokenUtilities.USER_TOKEN_KEY,
                         ""
                 );
+                SharedPreferencesUtilities.saveData(
+                        getContext(),
+                        TokenUtilities.USER_NAME,
+                        ""
+                );
+                textViewSettingUsername.setVisibility(View.INVISIBLE);
                 startNewActivity(v, new HomeVisitorActivity());
             }
         });
