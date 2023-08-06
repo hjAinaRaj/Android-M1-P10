@@ -47,7 +47,7 @@
             android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:background="@drawable/bg_recat"
-            android:hint="Search"
+            android:hint="@string/search"
             android:maxLines="6"
             android:paddingLeft="10dp"
             android:textColor="@color/black" />
