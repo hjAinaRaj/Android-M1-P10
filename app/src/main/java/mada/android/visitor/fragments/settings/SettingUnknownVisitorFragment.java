@@ -44,8 +44,11 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     private Button buttonToFr;
     private Button buttonToLight;
     private Button buttonToDark;
+    private Button buttonNotifOn;
+    private Button buttonNotifOff;
     private RadioGroup themeRadioGroup;
     private RadioGroup langRadioGroup;
+    private RadioGroup notifRadioGroup;
     private MyFirebaseMessagingService myFirebaseMessagingService;
     private boolean isUpdatingTheme = false;
 
@@ -135,25 +138,38 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
     }
 
     public void initNotificationSwitch(View view){
-        this.switchNotification = (Switch) view.findViewById(R.id.switchNotif);
+     notifRadioGroup = view.findViewById(R.id.notifRadioGroup);
+     buttonNotifOff = view.findViewById(R.id.notifOffRadioBtn);
+     buttonNotifOn = view.findViewById(R.id.notifOnRadioBtn);
+
         boolean defaultValue = SharedPreferencesUtilities.
                 loadDataBoolean(getContext(), NOTIF_KEY, false);
-        this.switchNotification.setChecked(defaultValue);
-        this.switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        notifRadioGroup.check(defaultValue? R.id.notifOnRadioBtn : R.id.notifOffRadioBtn);
+
+        this.buttonNotifOn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
                 try {
-                    if(isChecked){
                         myFirebaseMessagingService.saveSavedToken();
-                    }else{
-                        myFirebaseMessagingService.unsubscribeSavedToken();
-                    }
-                    SharedPreferencesUtilities.saveDataBoolean(getContext(), NOTIF_KEY, isChecked);
+
+                    SharedPreferencesUtilities.saveDataBoolean(getContext(), NOTIF_KEY, true);
                 }catch (Exception e){
                     Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        this.buttonNotifOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            try {
+                myFirebaseMessagingService.unsubscribeSavedToken();
+                SharedPreferencesUtilities.saveDataBoolean(getContext(), NOTIF_KEY, false);
+        }catch (Exception e){
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+            }
+        });
+
     }
 
     public void initNightMode(View view){

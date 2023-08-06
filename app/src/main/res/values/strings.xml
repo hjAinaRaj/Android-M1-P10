@@ -50,4 +50,6 @@
     <string name="favorites">Favoris</string>
     <string name="prev">Préc</string>
     <string name="next">Suiv</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
 </resources>

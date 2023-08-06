@@ -32,16 +32,71 @@
             android:textAlignment="center"
             android:textSize="34sp" />
 
-        <Switch
-            android:id="@+id/switchNotif"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="@string/active_notif" />
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/active_notif" />
+
+            <RadioGroup
+                android:id="@+id/notifRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/notifOnRadioBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_flat_selector"
+                    android:button="@null"
+                    android:checked="false"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/on"
+                    android:textAlignment="center"
+                    android:textColor="@color/radio_flat_text_selector"
+                    android:textColorHighlight="@color/radio_flat_text_selector"
+                    android:textColorHint="@color/radio_flat_text_selector"
+                    android:textColorLink="@color/radio_flat_text_selector"
+                    android:textCursorDrawable="@null"
+                    android:textIsSelectable="false" />
+
+                <RadioButton
+                    android:id="@+id/notifOffRadioBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_flat_selector"
+                    android:button="@null"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/off"
+                    android:textAlignment="center"
+                    android:textColor="@color/radio_flat_text_selector"
+                    android:textColorHighlight="@color/radio_flat_text_selector"
+                    android:textColorHint="@color/radio_flat_text_selector"
+                    android:textColorLink="@color/radio_flat_text_selector"
+                    android:textCursorDrawable="@null"
+                    android:textIsSelectable="false" />
+            </RadioGroup>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -103,7 +158,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
