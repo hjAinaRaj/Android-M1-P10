@@ -31,7 +31,7 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="content">Content</string>
-    <string name="localisation">Location</string>
+    <string name="localisation">Localisation</string>
     <string name="active_notif">Activate Notification</string>
     <string name="activate_night_mode">Activate Night Mode</string>
     <string name="valid">Validate</string>
