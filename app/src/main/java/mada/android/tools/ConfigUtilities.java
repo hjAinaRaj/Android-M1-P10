@@ -49,14 +49,10 @@ public class ConfigUtilities {
         updateTheme(context, isChecked);
         getActivityFromContext(context).recreate();
     }
+    /*
     public static void updateTheme(Activity activity, boolean isChecked){
         try {
-            /*if(isChecked){
-                // Activate night mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            }else{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }*/
+
             UiModeManager uiModeManager = (UiModeManager) activity.getSystemService(Context.UI_MODE_SERVICE);
             if (uiModeManager != null) {
                 // Vérifier si le mode nuit est activé
