@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mada</string>
-    <string name="login">Log In</string>
+    <string name="login">Log in</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="destination">Destination</string>
     <string name="hotel">Hotel</string>
@@ -14,13 +15,13 @@
     <string name="email">Email Address</string>
     <string name="password">Password</string>
     <string name="no_account">Don\'t have an account yet?</string>
-    <string name="signin">Sign In</string>
+    <string name="signin">Sign in</string>
     <string name="name">Name</string>
     <string name="firstname">First Name</string>
     <string name="confirm_password">Confirm Your Password</string>
     <string name="have_account">Already have an account?</string>
     <string name="show_more">Show More</string>
-    <string name="logout">Log Out</string>
+    <string name="logout">Log out</string>
     <string name="notification_channel_id">Channel ID</string>
     <string name="notification_channel_title">Channel Title</string>
     <string name="notification_channel_description">Description of this channel</string>
@@ -31,15 +32,19 @@
     <string name="description">Description</string>
     <string name="content">Content</string>
     <string name="localisation">Location</string>
-    <string name="active_notif">Enable Notification</string>
-    <string name="activate_night_mode">Enable Night Mode</string>
-    <string name="results">Results</string>
+    <string name="active_notif">Activate Notification</string>
+    <string name="activate_night_mode">Activate Night Mode</string>
     <string name="valid">Validate</string>
     <string name="fr">Fr</string>
     <string name="en">En</string>
     <string name="clair">Light</string>
     <string name="dark">Dark</string>
-    <string name="view_results">View results</string>
+    <string name="results">Results</string>
+    <string name="view_results">View Results</string>
     <string name="incomplete_answers_msg">Please answer all the questions</string>
-    <string name="results_review_hint">You may review the questions with the correct answers</string>
+    <string name="results_review_hint">You can review previous questions to see the correct answers</string>
+    <string name="select_theme">Select Theme</string>
+    <string name="select_language">Select Language</string>
+    <string name="add_destination">Add Destination</string>
 </resources>
+
