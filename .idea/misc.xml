@@ -12,10 +12,12 @@
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/ic_favorite_heart.xml" value="0.17685185185185184" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/ic_heart.xml" value="0.17685185185185184" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/ic_launcher_background.xml" value="0.115625" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/loader.xml" value="0.1" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/radio_flat_regular.xml" value="0.13385416666666666" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/radio_flat_selected.xml" value="0.13385416666666666" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/radio_flat_selector.xml" value="0.13385416666666666" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/radio_flat_text_selector.xml" value="0.13385416666666666" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/spinner.xml" value="0.1" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/drawable/splash_screen.xml" value="0.15989583333333332" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/activity_auth.xml" value="0.16893115942028986" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/activity_destination_details.xml" value="0.134375" />
@@ -25,7 +27,7 @@
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/destination_home_item.xml" value="0.22" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_blank.xml" value="0.1" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_destination_action.xml" value="0.22" />
-        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_destination_details.xml" value="0.31564245810055863" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_destination_details.xml" value="0.1" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_destination_item.xml" value="0.25" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_destination_list.xml" value="0.25" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_home_admin_actuality_list.xml" value="0.16893115942028986" />
@@ -42,6 +44,7 @@
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/fragment_setting_visitor.xml" value="0.16893115942028986" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/main_activity.xml" value="0.14375" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/main_fragment.xml" value="0.1" />
+        <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/layout/splash_screen.xml" value="0.129981884057971" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/menu/admin_menu.xml" value="0.11770833333333333" />
         <entry key="..\:/ITUniversity/S7/Android/Examen/Projets/Android-M1-P10/app/src/main/res/menu/visitor_menu.xml" value="0.22" />
       </map>

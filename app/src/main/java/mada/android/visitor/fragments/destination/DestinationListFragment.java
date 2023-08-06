@@ -35,6 +35,8 @@ import mada.android.models.destination.Destination;
 import mada.android.models.destination.DestinationList;
 import mada.android.services.DestinationService;
 import mada.android.tools.Base64Helper;
+import mada.android.tools.token.SharedPreferencesUtilities;
+import mada.android.tools.token.TokenUtilities;
 import mada.android.tools.ws.CustomCallback;
 import mada.android.tools.ws.FilterItem;
 import mada.android.tools.ws.Pagination;
@@ -53,6 +55,9 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     private FilterItem searchFilter;
     private FilterItem favoriteFilter;
     private Pagination pagination;
+    private LinearLayout destinationPaginLayout;
+    private LinearLayout destinationListProgressBarLayout;
+
 
     private Button prevButton;
     private Button nextButton;
@@ -83,7 +88,17 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_destination_list, container, false);
-        addFavoritesRadio(view);
+        String currentToken =  SharedPreferencesUtilities.loadData(
+                getContext(),
+                TokenUtilities.USER_TOKEN_KEY,
+                ""
+        );
+        if(currentToken != null && !currentToken.equals(""))
+            addFavoritesRadio(view);
+
+        destinationPaginLayout = view.findViewById(R.id.destinationPaginLayout);
+        destinationPaginLayout.setVisibility(View.GONE);
+        destinationListProgressBarLayout = view.findViewById(R.id.destinationListProgressBarLayout);
         getList(view);
 
         //Add search btn listener
@@ -113,8 +128,10 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         getList(view, new CustomCallback<DestinationList>() {
             @Override
             public void callback(DestinationList data, View v) throws Exception {
+                destinationListProgressBarLayout.setVisibility(View.GONE);
                 DestinationList list = data;
                 destinationList = list.getData();
+                if(destinationList.size() > 0) destinationPaginLayout.setVisibility(View.VISIBLE);
                 RecyclerView recyclerView = (RecyclerView)  view.findViewById(R.id.destinationRecyclerView);
 
                 recyclerView.setHasFixedSize(true);

@@ -8,6 +8,20 @@
     android:layout_height="match_parent"
     tools:context=".visitor.fragments.destination.DestinationListFragment">
 
+    <LinearLayout
+        android:id="@+id/destinationListProgressBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_chatbox"
@@ -72,6 +86,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
+        android:id="@+id/destinationPaginLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

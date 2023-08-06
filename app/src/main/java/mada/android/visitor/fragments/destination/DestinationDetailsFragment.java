@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +54,9 @@ public class DestinationDetailsFragment extends Fragment {
     private ImageView destinationImageView;
     private String destinationId;
     private DestinationService service;
+    private LinearLayout destinationDetailsProgressBarLayout;
     private MapView mapView;
+    private LinearLayout destinationDetailsLayout;
     private static final String ARG_DESTINATION_ID = "ARG_DESTINATION_ID";
 
     public DestinationDetailsFragment() {
@@ -95,7 +98,9 @@ public class DestinationDetailsFragment extends Fragment {
         this.titleTextView =  view.findViewById(R.id.destinationDetailsTitle);
         this.descriptionTextView = view.findViewById(R.id.destinationDetailsDescription);
         this.destinationImageView = view.findViewById(R.id.destinationItemImage);
-
+        destinationDetailsProgressBarLayout = view.findViewById(R.id.destinationDetailsProgressBarLayout);
+        destinationDetailsLayout= view.findViewById(R.id.destinationDetailsLayout);
+        destinationDetailsLayout.setVisibility(View.GONE);
         this.youtubePlayerView = view.findViewById(R.id.quizIntroVideoView);
 
         this.initMap(view);
@@ -111,6 +116,8 @@ try{
                 if(response.code() != 200)
                     Toast.makeText(view.getContext(), "Destination server error", Toast.LENGTH_SHORT).show();
                 else{
+                    destinationDetailsProgressBarLayout.setVisibility(View.GONE);
+                    destinationDetailsLayout.setVisibility(View.VISIBLE);
                     Destination destination = response.body();
                     fragment.descriptionTextView.setText(destination.getDescription());
                     fragment.titleTextView.setText(destination.getTitle());
