@@ -95,9 +95,9 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
         );
         if(currentToken != null && !currentToken.equals(""))
             addFavoritesRadio(view);
-
+        recyclerView = view.findViewById(R.id.destinationRecyclerView);
         destinationPaginLayout = view.findViewById(R.id.destinationPaginLayout);
-        destinationPaginLayout.setVisibility(View.GONE);
+
         destinationListProgressBarLayout = view.findViewById(R.id.destinationListProgressBarLayout);
         getList(view);
 
@@ -125,13 +125,14 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
 
     private void getList(View view){
         DestinationListFragment fragment = this;
+
         getList(view, new CustomCallback<DestinationList>() {
             @Override
             public void callback(DestinationList data, View v) throws Exception {
-                destinationListProgressBarLayout.setVisibility(View.GONE);
+
                 DestinationList list = data;
                 destinationList = list.getData();
-                if(destinationList.size() > 0) destinationPaginLayout.setVisibility(View.VISIBLE);
+
                 RecyclerView recyclerView = (RecyclerView)  view.findViewById(R.id.destinationRecyclerView);
 
                 recyclerView.setHasFixedSize(true);
@@ -162,6 +163,8 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     }
     private void reloadList(View view){
         DestinationListFragment fragment = this;
+
+
         getList(view, new CustomCallback<DestinationList>() {
             @Override
             public void callback(DestinationList list, View v) throws Exception {
@@ -174,6 +177,10 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
     }
     private void getList(View view, CustomCallback<DestinationList> displayCallback){
         try {
+            destinationPaginLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            destinationListProgressBarLayout.setVisibility(View.VISIBLE);
+
             Call<DestinationList> call = service.getForConnectedUser(new ArrayList<FilterItem>(){{
                 add(searchFilter);
                 add(favoriteFilter);
@@ -187,6 +194,11 @@ public class DestinationListFragment extends Fragment implements DestinationAdap
                             Toast.makeText(view.getContext(), "Destination server error", Toast.LENGTH_SHORT).show();
                         else{
                             DestinationList list = response.body();
+                            int destinationElmtVisibility = list.getData().size()>0 ?View.VISIBLE: View.GONE;
+                            destinationListProgressBarLayout.setVisibility(destinationElmtVisibility);
+                            destinationPaginLayout.setVisibility(destinationElmtVisibility);
+                            recyclerView.setVisibility(View.GONE);
+
                             prevButton.setEnabled(pagination.hasPrev(list.getMeta().getTotalElmtCount()));
                             nextButton.setEnabled(pagination.hasNext(list.getMeta().getTotalElmtCount()));
                             displayCallback.callback(list, view);
