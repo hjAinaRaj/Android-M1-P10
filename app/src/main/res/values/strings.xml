@@ -45,4 +45,5 @@
     <string name="select_theme">Choisir le thème</string>
     <string name="select_language">Choisir langue</string>
     <string name="add_destination">Ajouter destination</string>
+    <string name="search">Rechercher</string>
 </resources>
