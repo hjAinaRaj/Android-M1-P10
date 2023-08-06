@@ -36,7 +36,7 @@
             android:paddingTop="0dp"
             android:paddingRight="8dp"
             android:paddingBottom="0dp"
-            android:text="Start quiz"
+            android:text="@string/start_quiz"
             android:textAllCaps="false"
             android:textSize="12sp" />
 

@@ -67,7 +67,7 @@
             android:layout_marginTop="22dp"
             android:layout_marginBottom="22dp"
             android:gravity="center"
-            android:text="Site touristique"
+            android:text="@string/site_touristique"
             android:textSize="16sp"
             tools:ignore="HardcodedText" />
     </RelativeLayout>
