@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import mada.android.R;
 import mada.android.administrator.activities.home.HomeAdminActivity;
 import mada.android.commons.activities.AuthActivity;
@@ -22,9 +24,11 @@ import mada.android.models.users.UserToken;
 import mada.android.services.UserService;
 import mada.android.tools.token.SharedPreferencesUtilities;
 import mada.android.tools.token.TokenUtilities;
+import mada.android.tools.ws.ErrorModel;
 import mada.android.visitor.activities.home.HomeVisitorActivity;
 import mada.android.visitor.fragments.settings.SettingConnectedVisitorFragment;
 import mada.android.visitor.fragments.settings.SettingUnknownVisitorFragment;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,6 +84,22 @@ public class LoginFragment extends BaseFragment {
                     call.enqueue(new Callback<UserToken>() {
                         @Override
                         public void onResponse(Call<UserToken> call, Response<UserToken> response) {
+
+                            if(response.code() != 200){
+                                try{
+                                    String errorBodyStr = response.errorBody().string();
+                                    Gson gson = new Gson();
+                                    ErrorModel errorModel = gson.fromJson(errorBodyStr, ErrorModel.class);
+
+                                    Toast.makeText(view.getContext(), errorModel.getMessage(), Toast.LENGTH_SHORT).show();
+                                }catch(Exception e){
+                                    Toast.makeText(view.getContext(), "Error when dealing with login error", Toast.LENGTH_SHORT).show();
+                                }
+
+
+                                return;
+                            }
+
                             UserToken userToken = response.body();
                             SharedPreferencesUtilities.saveData(
                                     getContext(),
