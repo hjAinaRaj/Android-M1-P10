@@ -129,6 +129,7 @@
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="@string/have_account"
                 android:textAlignment="center" />
 
@@ -137,7 +138,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/green_500" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
