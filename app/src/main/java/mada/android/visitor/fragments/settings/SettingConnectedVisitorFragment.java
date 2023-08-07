@@ -46,6 +46,16 @@ public class SettingConnectedVisitorFragment extends BaseFragment {
                         TokenUtilities.USER_TOKEN_KEY,
                         ""
                 );
+                SharedPreferencesUtilities.saveData(
+                        getContext(),
+                        TokenUtilities.USER_NAME,
+                        ""
+                );
+                SharedPreferencesUtilities.saveData(
+                        getContext(),
+                        TokenUtilities.USER_ROLE,
+                        ""
+                );
                 startNewActivity(v, new HomeVisitorActivity());
             }
         });

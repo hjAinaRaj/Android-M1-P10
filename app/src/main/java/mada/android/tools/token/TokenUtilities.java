@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 public class TokenUtilities {
     public final static String USER_TOKEN_KEY = "user_token";
     public final static String USER_NAME = "user_name";
+    public final static String USER_ROLE = "user_role";
 
     public static void saveToken(Activity activity, String token){
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
@@ -19,4 +20,6 @@ public class TokenUtilities {
         SharedPreferences sharedPreferences = activity.getPreferences(Context.MODE_PRIVATE);
         return sharedPreferences.getString(USER_TOKEN_KEY, "");
     }
+
+
 }

@@ -2,7 +2,7 @@
 <resources>
     <declare-styleable name="RoundedImageView">
         <attr name="cornerRadius" format="dimension" />
-        <attr name="mainBackgroundColor" format="reference"/>
-        <attr name="itemColor" format="reference"/>
+        <attr name="mainBackgroundColor" format="color"/>
+        <attr name="itemColor" format="color"/>
     </declare-styleable>
 </resources>

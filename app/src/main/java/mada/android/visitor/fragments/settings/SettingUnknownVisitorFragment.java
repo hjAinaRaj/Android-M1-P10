@@ -129,6 +129,12 @@ public class SettingUnknownVisitorFragment extends BaseFragment {
                         TokenUtilities.USER_NAME,
                         ""
                 );
+
+                SharedPreferencesUtilities.saveData(
+                        getContext(),
+                        TokenUtilities.USER_ROLE,
+                        ""
+                );
                 textViewSettingUsername.setVisibility(View.INVISIBLE);
                 startNewActivity(v, new HomeVisitorActivity());
             }

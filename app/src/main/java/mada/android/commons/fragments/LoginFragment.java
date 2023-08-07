@@ -112,6 +112,12 @@ public class LoginFragment extends BaseFragment {
                                     userToken.getUser().getFirstName() + " "
                                     + userToken.getUser().getLastName()
                             );
+
+                            SharedPreferencesUtilities.saveData(
+                                    getContext(),
+                                    TokenUtilities.USER_ROLE,
+                                    userToken.getUser().getRoleId()+""
+                            );
                             Activity startingActivity = new HomeVisitorActivity();
                             if(userToken.getUser().getRoleId() == Constant.ROLE_ADMIN){
                                 startingActivity = new HomeAdminActivity();

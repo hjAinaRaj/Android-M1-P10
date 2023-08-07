@@ -3,15 +3,19 @@ package mada.android.visitor.activities.home;
 import androidx.core.splashscreen.SplashScreen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import mada.android.R;
+import mada.android.administrator.activities.home.HomeAdminActivity;
 import mada.android.commons.MyApplication;
 import mada.android.commons.activities.BaseActivity;
 import mada.android.tools.ConfigUtilities;
 import mada.android.tools.token.SharedPreferencesUtilities;
+import mada.android.tools.token.TokenUtilities;
 import mada.android.visitor.fragments.destination.DestinationListFragment;
 import mada.android.visitor.fragments.home.HomeVisitorFragment;
 import mada.android.visitor.fragments.quiz.QuizListFragment;
@@ -26,9 +30,29 @@ public class HomeVisitorActivity extends BaseActivity {
         //this.initGlobalPreferences();
         SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_visitor);
 
-        this.initWidget();
+        String currentRole = SharedPreferencesUtilities.loadData(
+                this,
+                TokenUtilities.USER_ROLE,
+                ""
+        );
+        Log.d("debug", "--------------------------------------Current role "+currentRole);
+        Class activityToLaunch = HomeAdminActivity.class;
+        if(currentRole.equals("1")||currentRole.equals(""))
+            activityToLaunch = HomeVisitorActivity.class;
+        if(!activityToLaunch.equals(HomeVisitorActivity.class)){
+            Intent intent = new Intent(this, activityToLaunch);
+            startActivity(intent);
+
+            finish();
+        }else{
+            setContentView(R.layout.activity_home_visitor);
+
+            this.initWidget();
+        }
+
+
+
     }
 
 
