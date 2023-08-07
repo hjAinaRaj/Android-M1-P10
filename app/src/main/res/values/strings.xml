@@ -53,5 +53,7 @@
     <string name="on">ON</string>
     <string name="off">OFF</string> 
     <string name="site_touristique">Site touristique</string>
-    <string name="start_quiz">Commencer</string> 
+    <string name="start_quiz">Commencer</string>
+    <string name="view_more">Voir plus</string>
+
 </resources>
